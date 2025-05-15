@@ -1,0 +1,48 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Contact book
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: This is a documentation of сontact book app
+tags:
+  - name: Contacts
+    description: Operations about contacts.
+  - name: Auth
+    description: Auth operations.
+servers:
+  - url: http://localhost:3000
+# paths:
+#   /auth/register:
+#     post:
+#       $ref: '../docs/swagger/paths/auth/register/post.yaml'
+#   /auth/login:
+#     post:
+#       $ref: '../docs/swagger/paths/auth/login/post.yaml'
+#   /auth/logout:
+#     post:
+#       $ref: '../docs/swagger/paths/auth/logout/post.yaml'
+#   /categories:
+#     get:
+#       $ref: '../docs/swagger/paths/categories/get.yaml'
+#   /summary:
+#     get:
+#       $ref: '../docs/swagger/paths/summary/get.yaml'
+#   /transactions:
+#     get:
+#       $ref: '../docs/swagger/paths/transactions/get.yaml'
+#     post:
+#       $ref: '../docs/swagger/paths/transactions/post.yaml'
+#     patch:
+#       $ref: '../docs/swagger/paths/transactions/patch.yaml'
+#     delete:
+#       $ref: '../docs/swagger/paths/transactions/delete.yaml'
+#   /user:
+#     get:
+#       $ref: '../docs/swagger/paths/user/get.yaml'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
