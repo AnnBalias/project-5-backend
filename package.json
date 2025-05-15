@@ -1,0 +1,37 @@
+{
+  "name": "nodejs-hw-mongodb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnnBalias/nodejs-hw-mongodb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/AnnBalias/nodejs-hw-mongodb/issues"
+  },
+  "homepage": "https://github.com/AnnBalias/nodejs-hw-mongodb#readme",
+  "description": "",
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "eslint": "^9.23.0",
+    "globals": "^16.0.0",
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.13.0",
+    "pino-http": "^10.4.0",
+    "pino-pretty": "^13.0.0"
+  }
+}
