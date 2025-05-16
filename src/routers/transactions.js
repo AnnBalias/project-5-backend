@@ -1,4 +1,7 @@
 import { Router } from 'express';
+import { isValidId } from '../middlewares/isValidId.js';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { deleteTransactionController } from '../controllers/transactions.js';
 
 export const transactionsRouter = Router();
 
@@ -7,5 +10,10 @@ export const transactionsRouter = Router();
 // Rout для оновлення транзакції
 
 // Rout для видалення транзакції
+transactionsRouter.delete(
+  '/:transactionId',
+  isValidId,
+  ctrlWrapper(deleteTransactionController),
+);
 
 // Rout для отримання всіх транзакцій
