@@ -9,14 +9,19 @@ import { userRouter } from './routers/user.js';
 import { categoriesRouter } from './routers/categories.js';
 import { transactionsRouter } from './routers/transactions.js';
 import { summaryRouter } from './routers/summary.js';
-// import { contactsRouter } from './routers/contacts.js';
-// import { notFoundHandler } from './middlewares/notFoundHandler.js';
-// import { errorHandler } from './middlewares/errorHandler.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import { errorHandler } from './middlewares/errorHandler.js';
 import { getEnvVar } from './utils/getEnvVar.js';
-// import { authRouter } from './routers/auth.js';
 
 export const setupServer = () => {
   const app = express();
+
+  // app.use(
+  //   cors({
+  //     origin: 'https://frontend.com', // Front link
+  //     credentials: true,
+  //   }),
+  // );
 
   app.use(cors());
   app.use(cookieParser());
@@ -31,8 +36,8 @@ export const setupServer = () => {
   app.use('/transactions', transactionsRouter);
   app.use('/summary', summaryRouter);
 
-  // app.use(notFoundHandler);
-  // app.use(errorHandler);
+  app.use(notFoundHandler);
+  app.use(errorHandler);
 
   const port = Number(getEnvVar('PORT', 3000));
   app.listen(port, () => {

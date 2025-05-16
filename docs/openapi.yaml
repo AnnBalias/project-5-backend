@@ -16,31 +16,31 @@ servers:
 # paths:
 #   /auth/register:
 #     post:
-#       $ref: '../docs/swagger/paths/auth/register/post.yaml'
+#       $ref: '../swagger/paths/auth/register/post.yaml'
 #   /auth/login:
 #     post:
-#       $ref: '../docs/swagger/paths/auth/login/post.yaml'
+#       $ref: '../swagger/paths/auth/login/post.yaml'
 #   /auth/logout:
 #     post:
-#       $ref: '../docs/swagger/paths/auth/logout/post.yaml'
+#       $ref: '../swagger/paths/auth/logout/post.yaml'
 #   /categories:
 #     get:
-#       $ref: '../docs/swagger/paths/categories/get.yaml'
+#       $ref: '../swagger/paths/categories/get.yaml'
 #   /summary:
 #     get:
-#       $ref: '../docs/swagger/paths/summary/get.yaml'
+#       $ref: '../swagger/paths/summary/get.yaml'
 #   /transactions:
 #     get:
-#       $ref: '../docs/swagger/paths/transactions/get.yaml'
+#       $ref: '../swagger/paths/transactions/get.yaml'
 #     post:
-#       $ref: '../docs/swagger/paths/transactions/post.yaml'
+#       $ref: '../swagger/paths/transactions/post.yaml'
 #     patch:
-#       $ref: '../docs/swagger/paths/transactions/patch.yaml'
+#       $ref: '../swagger/paths/transactions/patch.yaml'
 #     delete:
-#       $ref: '../docs/swagger/paths/transactions/delete.yaml'
+#       $ref: '../swagger/paths/transactions/delete.yaml'
 #   /user:
 #     get:
-#       $ref: '../docs/swagger/paths/user/get.yaml'
+#       $ref: '../swagger/paths/user/get.yaml'
 components:
   securitySchemes:
     bearerAuth:
