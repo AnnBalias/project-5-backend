@@ -12,9 +12,9 @@ export const initMongoConnection = async () => {
       `mongodb+srv://${user}:${password}@${url}/${db}?retryWrites=true&w=majority&appName=Cluster`,
     );
 
-    console.log(`Successfully connection to database ${db}`);
+    console.log(`Successfully established connection to database ${db}`);
   } catch (error) {
-    console.log(error.message);
+    console.log('Error while setting up mongo connection', error.message);
     throw error;
   }
 };

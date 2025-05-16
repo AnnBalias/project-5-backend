@@ -1,0 +1,14 @@
+export const handleSaveError = (error, doc, next) => {
+  error.status = 400;
+  next();
+};
+export const setUpdateSettings = function (next) {
+  this.options.new = true;
+  this.options.runValidators = true;
+  next();
+};
+// export const setFindOneAndUpdateSettings = function (next) {
+//   this.options.new = true;
+//   this.options.runValidators = true;
+//   next();
+// };
