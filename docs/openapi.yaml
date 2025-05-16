@@ -13,19 +13,19 @@ tags:
     description: Auth operations.
 servers:
   - url: http://localhost:3000
-# paths:
-#   /auth/register:
-#     post:
-#       $ref: '../swagger/paths/auth/register/post.yaml'
-#   /auth/login:
-#     post:
-#       $ref: '../swagger/paths/auth/login/post.yaml'
-#   /auth/logout:
-#     post:
-#       $ref: '../swagger/paths/auth/logout/post.yaml'
-#   /categories:
-#     get:
-#       $ref: '../swagger/paths/categories/get.yaml'
+paths:
+  #   /auth/register:
+  #     post:
+  #       $ref: '../swagger/paths/auth/register/post.yaml'
+  #   /auth/login:
+  #     post:
+  #       $ref: '../swagger/paths/auth/login/post.yaml'
+  #   /auth/logout:
+  #     post:
+  #       $ref: '../swagger/paths/auth/logout/post.yaml'
+  /categories:
+    get:
+      $ref: '../swagger/paths/categories/get.yaml'
 #   /summary:
 #     get:
 #       $ref: '../swagger/paths/summary/get.yaml'
