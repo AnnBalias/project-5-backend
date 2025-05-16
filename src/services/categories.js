@@ -8,3 +8,5 @@ export const getCategories = async (req, res) => {
     data: categories,
   });
 };
+
+console.log('categories');
