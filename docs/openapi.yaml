@@ -1,18 +1,25 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: Contact book
+  title: Spendy
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description: This is a documentation of сontact book app
+  description: This is a documentation of Expence Tracker — Spendy
 tags:
-  - name: Contacts
-    description: Operations about contacts.
   - name: Auth
     description: Auth operations.
+  - name: Categories
+    description: Get categories operation.
+  - name: Summary
+    description: Get summary by period.
+  - name: Transactions
+    description: Transactions operations.
+  - name: User
+    description: Get user operation.
 servers:
   - url: http://localhost:3000
+  - url: https://spendy-mu36.onrender.com
 paths:
   #   /auth/register:
   #     post:
@@ -29,18 +36,18 @@ paths:
   /summary/{period}:
     get:
       $ref: '../swagger/paths/summary/get.yaml'
-#   /transactions:
-#     get:
-#       $ref: '../swagger/paths/transactions/get.yaml'
-#     post:
-#       $ref: '../swagger/paths/transactions/post.yaml'
-#     patch:
-#       $ref: '../swagger/paths/transactions/patch.yaml'
-#     delete:
-#       $ref: '../swagger/paths/transactions/delete.yaml'
-#   /user:
-#     get:
-#       $ref: '../swagger/paths/user/get.yaml'
+  /transactions:
+    #     get:
+    #       $ref: '../swagger/paths/transactions/get.yaml'
+    #     post:
+    #       $ref: '../swagger/paths/transactions/post.yaml'
+    patch:
+      $ref: '../swagger/paths/transactions/{id}/patch.yaml'
+  #     delete:
+  #       $ref: '../swagger/paths/transactions/delete.yaml'
+  /user:
+    get:
+      $ref: '../swagger/paths/user/get.yaml'
 components:
   securitySchemes:
     bearerAuth:

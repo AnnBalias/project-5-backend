@@ -9,9 +9,13 @@ import {
   getTransactionByIdController,
   addTransactionController,
   deleteTransactionController,
+  patchTransactionController,
 } from '../controllers/transactions.js';
 
-const transactionsRouter = Router();
+import { patchTransactionSchema } from '../validation/transaction.js';
+//import { patchTransactionController } from '../controllers/transaction.js';
+
+export const transactionsRouter = Router();
 
 transactionsRouter.use(authenticate);
 
@@ -23,6 +27,14 @@ transactionsRouter.get('/:id', isValidId, ctrlWrapper(getTransactionByIdControll
 
 // Add new transaction
 transactionsRouter.post('/', validateBody(transactionAddSchema), ctrlWrapper(addTransactionController));
+
+// Rout для оновлення транзакції
+transactionsRouter.patch(
+  '/:transactionId',
+  isValidId,
+  validateBody(patchTransactionSchema),
+  ctrlWrapper(patchTransactionController),
+);
 
 // Delete transaction
 transactionsRouter.delete('/:transactionId', isValidId, ctrlWrapper(deleteTransactionController));

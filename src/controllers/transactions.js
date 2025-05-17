@@ -1,9 +1,11 @@
 import createHttpError from 'http-errors';
+
 import { 
   getAllTransactions, 
   getTransactionById, 
   addTransaction,
-  deleteTransaction 
+  deleteTransaction,
+  updateTransaction
 } from '../services/transactions.js';
 
 export const getTransactionController = async (req, res) => {
@@ -30,6 +32,31 @@ export const addTransactionController = async (req, res) => {
   const userId = req.user._id;
   const transaction = await addTransaction(req.body, userId);
   res.status(201).json(transaction);
+}
+
+export const patchTransactionController = async (req, res, next) => {
+  // const userId = req.user._id;
+
+  const { transactionId } = req.params;
+  //const { type, comment } = req.body;
+  const currentTransaction = await updateTransaction(
+    transactionId,
+    // userId,
+
+    { ...req.body },
+  );
+
+  if (!currentTransaction) {
+    next(
+      createHttpError(404, `Transaction with id=${transactionId} not found`),
+    );
+    return;
+  }
+  res.status(200).json({
+    status: 200,
+    message: `Successfully updated transaction with id = ${transactionId} !`,
+    data: currentTransaction,
+  });
 };
 
 export const deleteTransactionController = async (req, res, next) => {

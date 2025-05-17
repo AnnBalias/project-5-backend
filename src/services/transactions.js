@@ -1,6 +1,7 @@
 // сервіси для роботи з транзакціями
 import { TransactionsCollection } from '../db/models/transaction.js';
 
+
 export const getAllTransactions = async (userId) => {
   const transactions = await TransactionsCollection.find({ userId })
     .sort({ date: -1, createdAt: -1 });
@@ -20,6 +21,24 @@ export const addTransaction = async (transactionData, userId) => {
     ...transactionData,
     userId
   });
+};
+
+export const updateTransaction = async (
+  transactionId,
+  // userId,
+  payload,
+) => {
+  const transaction = await TransactionsCollection.findOneAndUpdate(
+    {
+      _id: transactionId,
+      // userId
+    },
+    payload,
+    {
+      new: true,
+    },
+  );
+
   return transaction;
 };
 
