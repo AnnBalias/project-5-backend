@@ -34,7 +34,7 @@ export const setupServer = () => {
   app.use('/user', userRouter);
   app.use('/categories', categoriesRouter);
   app.use('/transactions', transactionsRouter);
-  app.use('/summary', summaryRouter);
+  app.use('/summary', summaryRouter );
 
   app.use(notFoundHandler);
   app.use(errorHandler);
