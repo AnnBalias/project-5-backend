@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import { isValidId } from '../middlewares/isValidId.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-import { deleteTransactionController } from '../controllers/transactions.js';
+import {
+  deleteTransactionController,
+  patchTransactionController,
+} from '../controllers/transactions.js';
 
 import { validateBody } from '../utils/validateBody.js';
 import { patchTransactionSchema } from '../validation/transaction.js';
@@ -17,7 +20,7 @@ transactionsRouter.patch(
   isValidId,
   //   upload.single('photo'),
   validateBody(patchTransactionSchema),
-  //ctrlWrapper(patchContactsController),
+  ctrlWrapper(patchTransactionController),
 );
 
 transactionsRouter.delete(

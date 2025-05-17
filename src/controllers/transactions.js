@@ -19,7 +19,7 @@ export const patchTransactionController = async (req, res, next) => {
   }
   res.status(200).json({
     status: 200,
-    message: `Sucessfully update transaction with id = ${transactionId} !`,
+    message: `Successfully updated transaction with id = ${transactionId} !`,
     data,
   });
 };
