@@ -1,0 +1,25 @@
+properties:
+  _id:
+    description: 'User id'
+    type: string
+    example: 65e4decdd286b30065d54af9
+  name:
+    description: 'User name'
+    type: string
+    example: 'Valera'
+  email:
+    description: 'User email'
+    type: string
+    example: 'bublik34@example.com'
+  # photo:
+  #   description: 'Link to contact photo'
+  #   type: string
+  #   example: https://res.cloudinary.com/dy4vxv2lf/image/upload/image.png
+  createdAt:
+    description: 'Automatically added when you post to a contact'
+    type: string
+    example: '2025-04-27T10:55:52.393Z'
+  updatedAt:
+    description: 'Automatically added when you post to a contact'
+    type: string
+    example: '2025-04-28T18:22:58.663Z'

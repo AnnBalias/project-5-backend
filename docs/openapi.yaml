@@ -13,6 +13,7 @@ tags:
     description: Auth operations.
 servers:
   - url: http://localhost:3000
+  - url: https://spendy-mu36.onrender.com
 paths:
   #   /auth/register:
   #     post:
@@ -29,18 +30,18 @@ paths:
   /summary/{period}:
     get:
       $ref: '../swagger/paths/summary/get.yaml'
-#   /transactions:
-#     get:
-#       $ref: '../swagger/paths/transactions/get.yaml'
-#     post:
-#       $ref: '../swagger/paths/transactions/post.yaml'
-#     patch:
-#       $ref: '../swagger/paths/transactions/patch.yaml'
-#     delete:
-#       $ref: '../swagger/paths/transactions/delete.yaml'
-#   /user:
-#     get:
-#       $ref: '../swagger/paths/user/get.yaml'
+  #   /transactions:
+  #     get:
+  #       $ref: '../swagger/paths/transactions/get.yaml'
+  #     post:
+  #       $ref: '../swagger/paths/transactions/post.yaml'
+  #     patch:
+  #       $ref: '../swagger/paths/transactions/patch.yaml'
+  #     delete:
+  #       $ref: '../swagger/paths/transactions/delete.yaml'
+  /user:
+    get:
+      $ref: '../swagger/paths/user/get.yaml'
 components:
   securitySchemes:
     bearerAuth:
