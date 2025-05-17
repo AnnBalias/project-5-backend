@@ -1,13 +1,17 @@
 import { Router } from 'express';
-import { isValidId } from '../middlewares/isValidId.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { isValidId } from '../middlewares/isValidId.js';
+import { authenticate } from '../middlewares/authenticate.js';
+import { validateBody } from '../utils/validateBody.js';
+import { transactionAddSchema } from '../validation/transaction.js';
 import {
+  getTransactionController,
+  getTransactionByIdController,
+  addTransactionController,
   deleteTransactionController,
   patchTransactionController,
 } from '../controllers/transactions.js';
-import { authenticate } from '../middlewares/authenticate.js';
 
-import { validateBody } from '../utils/validateBody.js';
 import { patchTransactionSchema } from '../validation/transaction.js';
 //import { patchTransactionController } from '../controllers/transaction.js';
 
@@ -15,7 +19,14 @@ export const transactionsRouter = Router();
 
 transactionsRouter.use(authenticate);
 
-// Rout для додавання транзакції
+// Get all transactions
+transactionsRouter.get('/', ctrlWrapper(getTransactionController));
+
+// Get transaction by ID
+transactionsRouter.get('/:id', isValidId, ctrlWrapper(getTransactionByIdController));
+
+// Add new transaction
+transactionsRouter.post('/', validateBody(transactionAddSchema), ctrlWrapper(addTransactionController));
 
 // Rout для оновлення транзакції
 transactionsRouter.patch(
@@ -25,10 +36,7 @@ transactionsRouter.patch(
   ctrlWrapper(patchTransactionController),
 );
 
-transactionsRouter.delete(
-  '/:transactionId',
-  isValidId,
-  ctrlWrapper(deleteTransactionController),
-);
+// Delete transaction
+transactionsRouter.delete('/:transactionId', isValidId, ctrlWrapper(deleteTransactionController));
 
-// Rout для отримання всіх транзакцій
+export default transactionsRouter;
