@@ -5,13 +5,18 @@ import {
 } from '../services/transactions.js';
 
 export const patchTransactionController = async (req, res, next) => {
-  const userId = req.user._id;
-  const { transactionId } = req.params;
-  const data = await updateTransaction(transactionId, userId, {
-    ...req.body,
-  });
+  // const userId = req.user._id;
 
-  if (!data) {
+  const { transactionId } = req.params;
+  //const { type, comment } = req.body;
+  const currentTransaction = await updateTransaction(
+    transactionId,
+    // userId,
+
+    { ...req.body },
+  );
+
+  if (!currentTransaction) {
     next(
       createHttpError(404, `Transaction with id=${transactionId} not found`),
     );
@@ -20,7 +25,7 @@ export const patchTransactionController = async (req, res, next) => {
   res.status(200).json({
     status: 200,
     message: `Successfully updated transaction with id = ${transactionId} !`,
-    data,
+    data: currentTransaction,
   });
 };
 
