@@ -9,7 +9,6 @@ export const transactionsRouter = Router();
 
 // Rout для оновлення транзакції
 
-// Rout для видалення транзакції
 transactionsRouter.delete(
   '/:transactionId',
   isValidId,
