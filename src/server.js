@@ -8,7 +8,7 @@ import { authRouter } from './routers/auth.js';
 import { userRouter } from './routers/user.js';
 import { categoriesRouter } from './routers/categories.js';
 import { transactionsRouter } from './routers/transactions.js';
-import { summaryRouter } from './routers/summary.js';
+import summaryRouter from './routers/summary.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { getEnvVar } from './utils/getEnvVar.js';
