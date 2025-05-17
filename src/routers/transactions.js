@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { isValidId } from '../middlewares/isValidId.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { deleteTransactionController } from '../controllers/transactions.js';
+import { authenticate } from '../middlewares/authenticate.js';
 import {
   deleteTransactionController,
   patchTransactionController,
@@ -11,6 +13,8 @@ import { patchTransactionSchema } from '../validation/transaction.js';
 //import { patchTransactionController } from '../controllers/transaction.js';
 
 export const transactionsRouter = Router();
+
+transactionsRouter.use(authenticate);
 
 // Rout для додавання транзакції
 
