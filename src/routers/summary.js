@@ -1,5 +1,9 @@
 import { Router } from 'express';
+import { getSummary } from '../controllers/summaryController.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
 
-export const summaryRouter = Router();
+const summaryRouter = Router();
 
-// Rout для отримання звітності
+summaryRouter.get('/:yearMonth', authMiddleware, getSummary);
+
+export default summaryRouter;

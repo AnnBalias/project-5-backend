@@ -8,3 +8,6 @@
 .vscode
 .DS_Store
 .idea
+
+# Pullrequests list
+pullrequests-list.txt
