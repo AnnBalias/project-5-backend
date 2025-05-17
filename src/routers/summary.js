@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { getSummaryByPeriod } from '../controllers/summaryController.js';
-import authMiddleware from '../middlewares/authMiddleware.js';
+import { getSummary } from '../controllers/summaryController.js';
+// import authMiddleware from '../middlewares/authMiddleware.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
-const summaryRouter = Router();
+export const summaryRouter = Router();
 
-summaryRouter.get('/:yearMonth', authMiddleware, getSummaryByPeriod);
+summaryRouter.use(authenticate);
 
-export default summaryRouter;
+summaryRouter.get('/:period', getSummary);

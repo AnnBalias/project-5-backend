@@ -26,9 +26,9 @@ paths:
   /categories:
     get:
       $ref: '../swagger/paths/categories/get.yaml'
-#   /summary:
-#     get:
-#       $ref: '../swagger/paths/summary/get.yaml'
+  /summary/{period}:
+    get:
+      $ref: '../swagger/paths/summary/get.yaml'
 #   /transactions:
 #     get:
 #       $ref: '../swagger/paths/transactions/get.yaml'

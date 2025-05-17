@@ -3,6 +3,7 @@ import { upload } from '../middlewares/upload.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import { deleteTransactionController } from '../controllers/transactions.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 import {
     getTransactionController,
@@ -28,6 +29,8 @@ transactionsRouter.use(authenticate);
 transactionsRouter.get('/', ctrlWrapper(getTransactionController));
 
 transactionsRouter.get('/:id',  isValidId, ctrlWrapper(getTransactionByIdController));
+
+transactionsRouter.use(authenticate);
 
 // Rout для додавання транзакції
 transactionsRouter.post('/', upload.single('photo'), validateBody(transactionAddSchema), ctrlWrapper(addTransactionController));
