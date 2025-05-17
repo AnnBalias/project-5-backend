@@ -7,4 +7,4 @@ export const userRouter = Router();
 
 userRouter.use(authenticate);
 
-userRouter.get('/:userId', ctrlWrapper(getUserController));
+userRouter.get('/', ctrlWrapper(getUserController));
