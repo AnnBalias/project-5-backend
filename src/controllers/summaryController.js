@@ -1,4 +1,4 @@
-import Transaction from '../models/Transaction.js';
+import { TransactionsCollection } from '../db/models/transaction.js';
 
 export const getSummaryByPeriod = async (req, res) => {
   try {
@@ -16,7 +16,7 @@ export const getSummaryByPeriod = async (req, res) => {
     const endDate = new Date(startDate);
     endDate.setMonth(endDate.getMonth() + 1);
 
-    const summary = await Transaction.aggregate([
+    const summary = await TransactionsCollection.aggregate([
       {
         $match: {
           userId: userId,
