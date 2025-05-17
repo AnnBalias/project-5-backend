@@ -1,5 +1,7 @@
 import { Router } from 'express';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { getUserController } from '../controllers/user.js';
 
 export const userRouter = Router();
 
-// Rout для отримання інформації про користувача
+userRouter.get('/:userId', ctrlWrapper(getUserController));

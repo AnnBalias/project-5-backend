@@ -18,7 +18,7 @@ export const setupServer = () => {
 
   // app.use(
   //   cors({
-  //     origin: 'https://frontend.com', // Front link
+  //     origin: 'https://project-5-frontend-pink.vercel.app',
   //     credentials: true,
   //   }),
   // );
