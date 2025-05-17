@@ -1,47 +1,30 @@
 import { Router } from 'express';
-import { upload } from '../middlewares/upload.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { isValidId } from '../middlewares/isValidId.js';
-import { deleteTransactionController } from '../controllers/transactions.js';
 import { authenticate } from '../middlewares/authenticate.js';
-
+import { validateBody } from '../utils/validateBody.js';
+import { transactionAddSchema } from '../validation/transaction.js';
 import {
-    getTransactionController,
-    getTransactionByIdController,
-    addTransactionController,
-    // upsertTransactionController,
-    // patchTransactionController,
+  getTransactionController,
+  getTransactionByIdController,
+  addTransactionController,
+  deleteTransactionController,
 } from '../controllers/transactions.js';
 
-// import { isValidId } from '../middlewares/isValidId.js';
-import { authenticate } from '../middlewares/authenticate.js';
-
-import { validateBody } from '../utils/validateBody.js';
-
-import { transactionAddSchema, transactionUpdateSchema } from '../validation/transaction.js';
-
-// export const transactionsRouter = Router();
 const transactionsRouter = Router();
 
 transactionsRouter.use(authenticate);
 
-// Rout для отримання всіх транзакцій
+// Get all transactions
 transactionsRouter.get('/', ctrlWrapper(getTransactionController));
 
-transactionsRouter.get('/:id',  isValidId, ctrlWrapper(getTransactionByIdController));
+// Get transaction by ID
+transactionsRouter.get('/:id', isValidId, ctrlWrapper(getTransactionByIdController));
 
-transactionsRouter.use(authenticate);
+// Add new transaction
+transactionsRouter.post('/', validateBody(transactionAddSchema), ctrlWrapper(addTransactionController));
 
-// Rout для додавання транзакції
-transactionsRouter.post('/', upload.single('photo'), validateBody(transactionAddSchema), ctrlWrapper(addTransactionController));
-
-
-// Rout для оновлення транзакції
-
-transactionsRouter.delete(
-  '/:transactionId',
-  isValidId,
-  ctrlWrapper(deleteTransactionController),
-);
+// Delete transaction
+transactionsRouter.delete('/:transactionId', isValidId, ctrlWrapper(deleteTransactionController));
 
 export default transactionsRouter;
