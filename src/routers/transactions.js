@@ -8,30 +8,29 @@ import {
     getTransactionController,
     getTransactionByIdController,
     addTransactionController,
-    upsertTransactionController,
-    patchTransactionController,
-    deleteTransactionController,
-  } from '../controllers/transactions.js'; // а чи є чи може буде така папка "controllers"?
+    // upsertTransactionController,
+    // patchTransactionController,
+} from '../controllers/transactions.js';
 
-import { isValidId } from '../middlewares/isValidId.js';
+// import { isValidId } from '../middlewares/isValidId.js';
 import { authenticate } from '../middlewares/authenticate.js';
 
 import { validateBody } from '../utils/validateBody.js';
 
-import { contactAddSchema, contactUpdateSchema } from '../validation/transaction.js';
+import { transactionAddSchema, transactionUpdateSchema } from '../validation/transaction.js';
 
 // export const transactionsRouter = Router();
-const contactsRouter = Router();
+const transactionsRouter = Router();
 
-contactsRouter.use(authenticate);
+transactionsRouter.use(authenticate);
 
 // Rout для отримання всіх транзакцій
-contactsRouter.get('/', ctrlWrapper(getTransactionsController));
+transactionsRouter.get('/', ctrlWrapper(getTransactionController));
 
-contactsRouter.get('/:id',  isValidId, ctrlWrapper(getTransactionsByIdController));
+transactionsRouter.get('/:id',  isValidId, ctrlWrapper(getTransactionByIdController));
 
 // Rout для додавання транзакції
-contactsRouter.post('/', upload.single('photo'), validateBody(transactionAddSchema), ctrlWrapper(addTransactionController));
+transactionsRouter.post('/', upload.single('photo'), validateBody(transactionAddSchema), ctrlWrapper(addTransactionController));
 
 
 // Rout для оновлення транзакції
