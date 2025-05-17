@@ -12,7 +12,7 @@ export const patchTransactionSchema = Joi.object({
   categoryType: Joi.string().valid(...categoryList),
   comment: Joi.string().max(60).messages({
     'string.base': 'comment should be a string',
-    'string.max': 'Сomment no more than 60 characters',
+    'string.max': 'Comment no more than 60 characters',
   }),
   sum: Joi.number(),
 });

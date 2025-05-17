@@ -1,8 +1,7 @@
-// модель транзакції
 import { Schema } from 'mongoose';
 import { model } from 'mongoose';
-import { typeList } from '../../constants/contacts.js';
-import { categoryList } from '../../constants/transactions.js';
+import { typeList } from '../../constants/transactions.js';
+import { categoryList } from '../../constants/categories.js';
 import { handleSaveError, setUpdateSettings } from './hooks.js';
 
 const transactionSchema = new Schema(
