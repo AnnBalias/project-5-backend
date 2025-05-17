@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { upload } from '../middlewares/upload.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { isValidId } from '../middlewares/isValidId.js';
+import { deleteTransactionController } from '../controllers/transactions.js';
 
 import {
     getTransactionController,
@@ -34,6 +36,10 @@ contactsRouter.post('/', upload.single('photo'), validateBody(transactionAddSche
 
 // Rout для оновлення транзакції
 
-// Rout для видалення транзакції
+transactionsRouter.delete(
+  '/:transactionId',
+  isValidId,
+  ctrlWrapper(deleteTransactionController),
+);
 
 export default transactionsRouter;
