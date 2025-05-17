@@ -1,5 +1,33 @@
 import createHttpError from 'http-errors';
-import { deleteTransaction } from '../services/transactions.js';
+import {
+  deleteTransaction,
+  updateTransaction,
+} from '../services/transactions.js';
+
+export const patchTransactionController = async (req, res, next) => {
+  // const userId = req.user._id;
+
+  const { transactionId } = req.params;
+  //const { type, comment } = req.body;
+  const currentTransaction = await updateTransaction(
+    transactionId,
+    // userId,
+
+    { ...req.body },
+  );
+
+  if (!currentTransaction) {
+    next(
+      createHttpError(404, `Transaction with id=${transactionId} not found`),
+    );
+    return;
+  }
+  res.status(200).json({
+    status: 200,
+    message: `Successfully updated transaction with id = ${transactionId} !`,
+    data: currentTransaction,
+  });
+};
 
 export const deleteTransactionController = async (req, res, next) => {
   //   const userId = req.user._id;

@@ -42,9 +42,7 @@
   "paths": {
     "/categories": {
       "get": {
-        "tags": [
-          "Categories"
-        ],
+        "tags": ["Categories"],
         "summary": "Get all categories",
         "operationId": "getCategories",
         "description": "Get all categories.",
@@ -123,9 +121,7 @@
     },
     "/summary/{period}": {
       "get": {
-        "tags": [
-          "Summary"
-        ],
+        "tags": ["Summary"],
         "summary": "Get transaction summary by period",
         "operationId": "getSummaryByPeriod",
         "description": "Returns income and expense summary by categories for a specific period (YYYY-MM). Requires authentication.",
@@ -242,9 +238,7 @@
     },
     "/user": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Get user data",
         "operationId": "getUser",
         "description": "Get user data",
@@ -271,11 +265,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -300,11 +290,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -341,11 +327,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
+              "required": ["status", "message", "data"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -357,9 +339,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
