@@ -1,8 +1,12 @@
 import { Router } from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-// import { validateBody } from '../utils/validateBody.js';
 import { loginUserSchema, registerUserSchema } from '../validation/auth.js';
-import { loginUserController, logoutUserController, refreshUserSessionController, registerUserController } from '../controllers/auth.js';
+import {
+  loginUserController,
+  logoutUserController,
+  refreshUserSessionController,
+  registerUserController,
+} from '../controllers/auth.js';
 import { validateBody } from '../utils/validateBody.js';
 
 export const authRouter = Router();
@@ -17,17 +21,11 @@ authRouter.post(
 authRouter.post(
   '/login',
   validateBody(loginUserSchema),
-  ctrlWrapper(loginUserController)
+  ctrlWrapper(loginUserController),
 );
 
 // Rout для logout-y
-authRouter.post(
-  '/logout',
-  ctrlWrapper(logoutUserController)
-);
+authRouter.post('/logout', ctrlWrapper(logoutUserController));
 
 // Rout для refreshToken
-authRouter.post(
-  '/refresh',
-  ctrlWrapper(refreshUserSessionController)
-);
+authRouter.post('/refresh', ctrlWrapper(refreshUserSessionController));
