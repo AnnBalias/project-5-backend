@@ -1,4 +1,3 @@
-// модель транзакції
 import { Schema } from 'mongoose';
 import { model } from 'mongoose';
 import { typeList } from '../../constants/transactions.js';
