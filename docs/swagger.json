@@ -2,12 +2,12 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "Contact book",
+    "title": "Spendy",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "This is a documentation of сontact book app"
+    "description": "This is a documentation of Expence Tracker — Spendy"
   },
   "servers": [
     {
@@ -19,12 +19,24 @@
   ],
   "tags": [
     {
-      "name": "Contacts",
-      "description": "Operations about contacts."
-    },
-    {
       "name": "Auth",
       "description": "Auth operations."
+    },
+    {
+      "name": "Categories",
+      "description": "Get categories operation."
+    },
+    {
+      "name": "Summary",
+      "description": "Get summary by period."
+    },
+    {
+      "name": "Transactions",
+      "description": "Transactions operations."
+    },
+    {
+      "name": "User",
+      "description": "Get user operation."
     }
   ],
   "paths": {
