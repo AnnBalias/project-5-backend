@@ -20,7 +20,6 @@ transactionsRouter.patch(
   //ctrlWrapper(patchContactsController),
 );
 
-// Rout для видалення транзакції
 transactionsRouter.delete(
   '/:transactionId',
   isValidId,
