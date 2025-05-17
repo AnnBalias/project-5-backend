@@ -1,1 +1,76 @@
-# get summary
+# GET /summary
+tags:
+  - Summary
+summary: Get transaction summary by period
+operationId: getSummaryByPeriod
+description: 'Returns income and expense summary by categories for a specific period (YYYY-MM). Requires authentication.'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: period
+    required: true
+    schema:
+      type: string
+      pattern: '^\d{4}-\d{2}$'
+    example: '2025-01'
+    description: 'The period in format YYYY-MM'
+responses:
+  '200':
+    description: Summary retrieved successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            period:
+              type: string
+              example: '2025-01'
+            income:
+              type: object
+              properties:
+                total:
+                  type: number
+                  example: 2300
+                byCategory:
+                  type: object
+                  additionalProperties:
+                    type: number
+                  example:
+                    Salary: 2000
+                    Freelance: 300
+            expense:
+              type: object
+              properties:
+                total:
+                  type: number
+                  example: 1200
+                byCategory:
+                  type: object
+                  additionalProperties:
+                    type: number
+                  example:
+                    Food: 500
+                    Rent: 700
+  '400':
+    description: Invalid period format
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Invalid or missing period. Use format YYYY-MM.
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    description: Summary not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: No transactions found for this period.
