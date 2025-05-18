@@ -1,5 +1,4 @@
 import createHttpError from 'http-errors';
-
 import { 
   getAllTransactions, 
   getTransactionById, 
@@ -11,38 +10,50 @@ import {
 export const getTransactionController = async (req, res) => {
   const userId = req.user._id;
   const transactions = await getAllTransactions(userId);
-  res.json(transactions);
+  res.json({
+    status: 200,
+    message: 'Successfully retrieved all transactions',
+    data: transactions
+  });
 };
 
 export const getTransactionByIdController = async (req, res, next) => {
   const userId = req.user._id;
   const { id } = req.params;
   
-  const transaction = await getTransactionById(id, userId);
-  
-  if (!transaction) {
-    next(createHttpError(404, `Transaction with id=${id} not found`));
+  try {
+    const transaction = await getTransactionById(id, userId);
+    
+    if (!transaction) {
+      next(createHttpError(404, `Transaction with id=${id} not found`));
+      return;
+    }
+    
+    res.json({
+      status: 200,
+      message: 'Successfully retrieved transaction',
+      data: transaction
+    });
+  } catch {
+    next(createHttpError(400, 'Invalid transaction ID format'));
     return;
   }
-  
-  res.json(transaction);
 };
 
 export const addTransactionController = async (req, res) => {
   const userId = req.user._id;
-  const transaction = await addTransaction(req.body, userId);
-  res.status(201).json(transaction);
-}
+  const newTransaction = await addTransaction(req.body, userId);
+  res.status(201).json({
+    status: 201,
+    message: 'Transaction created successfully',
+    data: newTransaction
+  });
+};
 
 export const patchTransactionController = async (req, res, next) => {
-  // const userId = req.user._id;
-
   const { transactionId } = req.params;
-  //const { type, comment } = req.body;
   const currentTransaction = await updateTransaction(
     transactionId,
-    // userId,
-
     { ...req.body },
   );
 
