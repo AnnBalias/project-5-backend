@@ -7,11 +7,13 @@ import {
   deleteTransaction,
   updateTransaction,
 } from '../services/transactions.js';
+import { UsersCollection } from '../db/models/user.js';
 
 export const getTransactionController = async (req, res) => {
   const userId = req.user._id;
   const transactions = await getAllTransactions(userId);
   res.json(transactions);
+  console.log('balance - ', req.user.balance);
 };
 
 export const getTransactionByIdController = async (req, res, next) => {
@@ -35,17 +37,12 @@ export const addTransactionController = async (req, res) => {
 };
 
 export const patchTransactionController = async (req, res, next) => {
-  console.log(req.user);
   const userId = req.user._id;
-  //let balance = req.user.balance;
   const { transactionId } = req.params;
 
-  const currentTransaction = await updateTransaction(
-    transactionId,
-    userId,
-
-    { ...req.body },
-  );
+  const currentTransaction = await updateTransaction(transactionId, userId, {
+    ...req.body,
+  });
 
   if (!currentTransaction) {
     next(
@@ -53,11 +50,14 @@ export const patchTransactionController = async (req, res, next) => {
     );
     return;
   }
+  const updatedUser = await UsersCollection.findById(userId);
+  const updatedBalance = updatedUser ? updatedUser.balance : req.user.balance;
+
   res.status(200).json({
     status: 200,
     message: `Successfully updated transaction with id = ${transactionId} !`,
     data: currentTransaction,
-    //balance,
+    balance: updatedBalance,
   });
 };
 
