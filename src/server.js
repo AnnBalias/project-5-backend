@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-import { logger } from './middlewares/logger.js';
+//import { logger } from './middlewares/logger.js';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
 import { authRouter } from './routers/auth.js';
 import { userRouter } from './routers/user.js';
@@ -26,7 +26,7 @@ export const setupServer = () => {
   app.use(cors());
   app.use(cookieParser());
   app.use(express.json());
-  app.use(logger);
+  // app.use(logger);
 
   app.use('/api-docs', swaggerDocs());
 
@@ -34,7 +34,7 @@ export const setupServer = () => {
   app.use('/user', userRouter);
   app.use('/categories', categoriesRouter);
   app.use('/transactions', transactionsRouter);
-  app.use('/summary', summaryRouter );
+  app.use('/summary', summaryRouter);
 
   app.use(notFoundHandler);
   app.use(errorHandler);

@@ -1,11 +1,11 @@
 import createHttpError from 'http-errors';
 
-import { 
-  getAllTransactions, 
-  getTransactionById, 
+import {
+  getAllTransactions,
+  getTransactionById,
   addTransaction,
   deleteTransaction,
-  updateTransaction
+  updateTransaction,
 } from '../services/transactions.js';
 
 export const getTransactionController = async (req, res) => {
@@ -17,14 +17,14 @@ export const getTransactionController = async (req, res) => {
 export const getTransactionByIdController = async (req, res, next) => {
   const userId = req.user._id;
   const { id } = req.params;
-  
+
   const transaction = await getTransactionById(id, userId);
-  
+
   if (!transaction) {
     next(createHttpError(404, `Transaction with id=${id} not found`));
     return;
   }
-  
+
   res.json(transaction);
 };
 
@@ -32,16 +32,17 @@ export const addTransactionController = async (req, res) => {
   const userId = req.user._id;
   const transaction = await addTransaction(req.body, userId);
   res.status(201).json(transaction);
-}
+};
 
 export const patchTransactionController = async (req, res, next) => {
-  // const userId = req.user._id;
-
+  console.log(req.user);
+  const userId = req.user._id;
+  //let balance = req.user.balance;
   const { transactionId } = req.params;
-  //const { type, comment } = req.body;
+
   const currentTransaction = await updateTransaction(
     transactionId,
-    // userId,
+    userId,
 
     { ...req.body },
   );
@@ -56,19 +57,22 @@ export const patchTransactionController = async (req, res, next) => {
     status: 200,
     message: `Successfully updated transaction with id = ${transactionId} !`,
     data: currentTransaction,
+    //balance,
   });
 };
 
 export const deleteTransactionController = async (req, res, next) => {
   const userId = req.user._id;
   const { transactionId } = req.params;
-  
+
   const transaction = await deleteTransaction(transactionId, userId);
 
   if (!transaction) {
-    next(createHttpError(404, `Transaction with id=${transactionId} not found`));
+    next(
+      createHttpError(404, `Transaction with id=${transactionId} not found`),
+    );
     return;
   }
-  
+
   res.status(204).send();
 };
