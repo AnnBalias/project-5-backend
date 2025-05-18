@@ -10,4 +10,5 @@ export const categoryList = [
   'Leisure',
   'Other expenses',
   'Entertainment',
+  'Income',
 ];
