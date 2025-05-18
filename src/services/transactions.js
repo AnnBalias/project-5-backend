@@ -9,18 +9,9 @@ export const getAllTransactions = async (userId) => {
     createdAt: -1,
   });
   return result;
-  const transactions = await TransactionsCollection.find({ userId }).sort({
-    date: -1,
-    createdAt: -1,
-  });
-
-  return transactions;
 };
 
 export const getTransactionById = async (transactionId, userId) => {
-  const transaction = await TransactionsCollection.findOne({
-    _id: transactionId,
-    userId,
   const result = await TransactionsCollection.findOne({
     transactionId,
     userId,
@@ -32,15 +23,13 @@ export const addTransaction = async (transactionData, userId) => {
   const result = await TransactionsCollection.create({
     ...transactionData,
     userId,
-  
   });
-  const balanceChange = calculateBalanceChange(null, transaction);
+  const balanceChange = calculateBalanceChange(null, result);
   await UsersCollection.findByIdAndUpdate(userId, {
     $inc: { balance: balanceChange },
   });
   return result;
 };
-
 
 export const updateTransaction = async (transactionId, userId, payload) => {
   const oldTransaction = await TransactionsCollection.findById(

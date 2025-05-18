@@ -17,7 +17,7 @@ export const getTransactionController = async (req, res) => {
     message: 'Successfully retrieved all transactions',
     data: transactions,
   });
-  res.json(transactions);
+
   console.log('balance - ', req.user.balance);
 };
 
