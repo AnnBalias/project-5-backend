@@ -23,10 +23,18 @@ transactionsRouter.use(authenticate);
 transactionsRouter.get('/', ctrlWrapper(getTransactionController));
 
 // Get transaction by ID
-transactionsRouter.get('/:id', isValidId, ctrlWrapper(getTransactionByIdController));
+transactionsRouter.get(
+  '/:transactionId',
+  isValidId,
+  ctrlWrapper(getTransactionByIdController),
+);
 
 // Add new transaction
-transactionsRouter.post('/', validateBody(transactionAddSchema), ctrlWrapper(addTransactionController));
+transactionsRouter.post(
+  '/',
+  validateBody(transactionAddSchema),
+  ctrlWrapper(addTransactionController),
+);
 
 // Rout для оновлення транзакції
 transactionsRouter.patch(
@@ -37,6 +45,10 @@ transactionsRouter.patch(
 );
 
 // Delete transaction
-transactionsRouter.delete('/:transactionId', isValidId, ctrlWrapper(deleteTransactionController));
+transactionsRouter.delete(
+  '/:transactionId',
+  isValidId,
+  ctrlWrapper(deleteTransactionController),
+);
 
 export default transactionsRouter;
