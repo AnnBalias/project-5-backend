@@ -1,1 +1,39 @@
 # transaction schema
+type: object
+required:
+  - _id
+  - date
+  - type
+  - category
+  - comment
+  - sum
+  - userId
+properties:
+  _id:
+    description: "Transaction's id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  date:
+    description: "Transaction's date"
+    type: date
+    example: '10-May-2025'
+  type:
+    description: "Transaction's type"
+    type: string
+    example: '+'
+  category:
+    description: "Transaction's category"
+    type: string
+    example: 'Car'
+  comment:
+    description: "Transaction's comment"
+    type: string
+    example: 'Details of this transaction'
+  sum:
+    description: 'Contact Type of the client'
+    enum: ['work', 'home', 'personal']
+    example: 'personal'
+  userId:
+    description: 'User iD of the user'
+    type: number
+    example: '300.00'
