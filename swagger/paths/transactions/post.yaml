@@ -1,1 +1,68 @@
 # post transaction
+tags:
+    - Transactions 
+summary: Create a new transaction
+description: Creates a new transaction with provided details. 
+operationId: createTransaction 
+security: 
+    - bearerAuth: []
+requestBody: 
+    description: Transaction data to create
+    required: true 
+    content:
+      application/json:
+        schema:
+          type: object
+          required: 
+            - date
+            - type
+            - category
+            - comment 
+            - sum 
+          properties:
+            date:
+              description: "Transaction's date"
+              type: string
+              format: date 
+              example: '10-May-2025' 
+            type:
+              description: "Transaction's type"
+              type: string 
+              example: '+' 
+            category:
+              description: "Transaction's category"
+              type: string 
+              example: 'Car' 
+            comment:
+              description: "Transaction's comment" 
+              type: string 
+              minLength: 2 
+              maxLength: 192 
+              # nullable: true 
+              example: 'Details of this transaction' 
+            sum:
+              description: 'Amount of the transaction' 
+              type: number 
+              minimum: 0.01 
+              maximum: 1000000  
+              example: 300.00 
+
+        examples:
+          createTransactionRequest:
+            summary: Example Transaction Request Body
+            value: 
+              date: '2025-05-20'
+              type: '+'
+              category: 'Food'
+              comment: 'Lunch expense'
+              sum: 500.00
+
+responses:
+    '201': 
+      $ref: '../../components/responses/201.yaml'
+    '400': 
+      $ref: '../../components/responses/400.yaml'
+    '401': 
+      $ref: '../../components/responses/401.yaml'
+    '500': 
+      $ref: '../../components/responses/500.yaml'

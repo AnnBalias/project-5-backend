@@ -1,1 +1,32 @@
-# 201
+description: Transaction successfully created
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 201
+        message:
+          type: string
+          example: Resource created successfully
+        data:
+          $ref: '../schemas/transaction.yaml'
+    examples:
+      success:
+        summary: Example successful creation response
+        value:
+          status: 201
+          message: Resource created successfully
+          data:
+            _id: 65f5a6b7c8d9e0f1a2b3c4d5
+            date: '10-May-2025'
+            type: '+'
+            category: 'Car'
+            comment: 'Details of this transaction'
+            sum: 'personal'
+            userId: 300
