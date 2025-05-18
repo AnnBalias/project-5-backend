@@ -12,6 +12,11 @@ import { UsersCollection } from '../db/models/user.js';
 export const getTransactionController = async (req, res) => {
   const userId = req.user._id;
   const transactions = await getAllTransactions(userId);
+  res.json({
+    status: 200,
+    message: 'Successfully retrieved all transactions',
+    data: transactions,
+  });
   res.json(transactions);
   console.log('balance - ', req.user.balance);
 };
@@ -28,12 +33,35 @@ export const getTransactionByIdController = async (req, res, next) => {
   }
 
   res.json(transaction);
+
+  try {
+    const transaction = await getTransactionById(id, userId);
+
+    if (!transaction) {
+      next(createHttpError(404, `Transaction with id=${id} not found`));
+      return;
+    }
+
+    res.json({
+      status: 200,
+      message: 'Successfully retrieved transaction',
+      data: transaction,
+    });
+  } catch {
+    next(createHttpError(400, 'Invalid transaction ID format'));
+    return;
+  }
 };
 
 export const addTransactionController = async (req, res) => {
   const userId = req.user._id;
-  const transaction = await addTransaction(req.body, userId);
-  res.status(201).json(transaction);
+
+  const newTransaction = await addTransaction(req.body, userId);
+  res.status(201).json({
+    status: 201,
+    message: 'Transaction created successfully',
+    data: newTransaction,
+  });
 };
 
 export const patchTransactionController = async (req, res, next) => {
