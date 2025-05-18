@@ -11,6 +11,10 @@ properties:
     description: 'User email'
     type: string
     example: 'bublik34@example.com'
+  balance:
+    description: 'User balance'
+    type: number
+    example: 3000.25
   # photo:
   #   description: 'Link to contact photo'
   #   type: string
