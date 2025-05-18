@@ -21,15 +21,19 @@ servers:
   - url: http://localhost:3000
   - url: https://spendy-mu36.onrender.com
 paths:
-  #   /auth/register:
-  #     post:
-  #       $ref: '../swagger/paths/auth/register/post.yaml'
-  #   /auth/login:
-  #     post:
-  #       $ref: '../swagger/paths/auth/login/post.yaml'
-  #   /auth/logout:
-  #     post:
-  #       $ref: '../swagger/paths/auth/logout/post.yaml'
+  /auth/register:
+    post:
+      $ref: '../swagger/paths/auth/register/post.yaml'
+  /auth/login:
+    post:
+      $ref: '../swagger/paths/auth/login/post.yaml'
+  /auth/logout:
+    post:
+      $ref: '../swagger/paths/auth/logout/post.yaml'
+  /auth/refresh:
+    post:
+      $ref: '../swagger/paths/auth/refresh/post.yaml'
+
   /categories:
     get:
       $ref: '../swagger/paths/categories/get.yaml'
