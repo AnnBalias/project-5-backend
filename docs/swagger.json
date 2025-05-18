@@ -105,7 +105,28 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "description": "Email in use",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Bad request"
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "Bad request"
+                    }
+                  }
+                }
+              }
+            }
           },
           "409": {
             "description": "Email in use",
@@ -119,6 +140,10 @@
                       "example": 409
                     },
                     "message": {
+                      "type": "string",
+                      "example": "Email in use"
+                    },
+                    "data": {
                       "type": "string",
                       "example": "Email in use"
                     }
