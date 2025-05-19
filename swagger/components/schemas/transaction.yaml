@@ -15,7 +15,7 @@ properties:
     example: 65e4decdd286b30065d54af9
   date:
     description: "Transaction's date"
-    type: date
+    type: string
     example: '10-May-2025'
   type:
     description: "Transaction's type"

@@ -510,6 +510,146 @@
       }
     },
     "/transactions": {
+      "get": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Get all transactions",
+        "description": "Retrieves a list of all transactions (details based on provided schema).",
+        "operationId": "listTransactions",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A list of transactions retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Transactions retrieved successfully"
+                    },
+                    "data": {
+                      "type": "array",
+                      "$ref": "#/components/schemas/transaction"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Create a new transaction",
+        "description": "Creates a new transaction with provided details.",
+        "operationId": "createTransaction",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Transaction data to create",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "date",
+                  "type",
+                  "category",
+                  "comment",
+                  "sum"
+                ],
+                "properties": {
+                  "date": {
+                    "description": "Transaction's date",
+                    "type": "string",
+                    "format": "date",
+                    "example": "10-May-2025"
+                  },
+                  "type": {
+                    "description": "Transaction's type",
+                    "type": "string",
+                    "example": "+"
+                  },
+                  "category": {
+                    "description": "Transaction's category",
+                    "type": "string",
+                    "example": "Car"
+                  },
+                  "comment": {
+                    "description": "Transaction's comment",
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 192,
+                    "example": "Details of this transaction"
+                  },
+                  "sum": {
+                    "description": "Amount of the transaction",
+                    "type": "number",
+                    "minimum": 0.01,
+                    "maximum": 1000000,
+                    "example": 300
+                  }
+                }
+              },
+              "examples": {
+                "createTransactionRequest": {
+                  "summary": "Example Transaction Request Body",
+                  "value": {
+                    "date": "2025-05-20",
+                    "type": "+",
+                    "category": "Food",
+                    "comment": "Lunch expense",
+                    "sum": 500
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/201"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
       "patch": {
         "tags": [
           "Transactions"
@@ -783,9 +923,108 @@
             "example": "2025-04-28T18:22:58.663Z"
           }
         }
+      },
+      "transaction": {
+        "type": "object",
+        "required": [
+          "_id",
+          "date",
+          "type",
+          "category",
+          "comment",
+          "sum",
+          "userId"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Transaction's id",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "date": {
+            "description": "Transaction's date",
+            "type": "string",
+            "example": "10-May-2025"
+          },
+          "type": {
+            "description": "Transaction's type",
+            "type": "string",
+            "example": "+"
+          },
+          "category": {
+            "description": "Transaction's category",
+            "type": "string",
+            "example": "Car"
+          },
+          "comment": {
+            "description": "Transaction's comment",
+            "type": "string",
+            "example": "Details of this transaction"
+          },
+          "sum": {
+            "description": "Contact Type of the client",
+            "enum": [
+              "work",
+              "home",
+              "personal"
+            ],
+            "example": "personal"
+          },
+          "userId": {
+            "description": "User iD of the user",
+            "type": "number",
+            "example": "300.00"
+          }
+        }
       }
     },
     "responses": {
+      "201": {
+        "description": "Transaction successfully created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 201
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Resource created successfully"
+                },
+                "data": {
+                  "$ref": "#/components/schemas/transaction"
+                }
+              }
+            },
+            "examples": {
+              "success": {
+                "summary": "Example successful creation response",
+                "value": {
+                  "status": 201,
+                  "message": "Resource created successfully",
+                  "data": {
+                    "_id": "65f5a6b7c8d9e0f1a2b3c4d5",
+                    "date": "10-May-2025",
+                    "type": "+",
+                    "category": "Car",
+                    "comment": "Details of this transaction",
+                    "sum": "personal",
+                    "userId": 300
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "400": {
         "description": "Bad request error",
         "content": {
