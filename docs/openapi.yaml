@@ -47,8 +47,8 @@ paths:
     #       $ref: '../swagger/paths/transactions/post.yaml'
     patch:
       $ref: '../swagger/paths/transactions/{id}/patch.yaml'
-  #     delete:
-  #       $ref: '../swagger/paths/transactions/delete.yaml'
+    delete:
+      $ref: '../swagger/paths/transactions/{id}/delete.yaml'
   /user:
     get:
       $ref: '../swagger/paths/user/get.yaml'

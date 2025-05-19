@@ -621,6 +621,38 @@
             "$ref": "#/components/responses/404"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Delete transaction by ID",
+        "operationId": "deleteTransaction",
+        "description": "Delete a transaction by it's ID.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted transaction"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
       }
     },
     "/user": {
@@ -829,7 +861,7 @@
         }
       },
       "404": {
-        "description": "Contact not found",
+        "description": "Transaction not found",
         "content": {
           "application/json": {
             "schema": {
@@ -846,7 +878,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "Contact not found"
+                  "example": "Transaction not found"
                 },
                 "data": {
                   "type": "object",
@@ -856,7 +888,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "The contact with the provided ID does not exist."
+                      "example": "The transaction with the provided ID does not exist."
                     }
                   }
                 }
