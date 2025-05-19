@@ -17,15 +17,14 @@ export const registerUser = async (payload) => {
   });
 };
 
-// сервіс для login-у
 export const loginUser = async (payload) => {
   const user = await UsersCollection.findOne({ email: payload.email });
   if (!user) {
-      throw createHttpError(404, 'User not found');
+    throw createHttpError(404, 'User not found');
   }
   const isEqual = await bcrypt.compare(payload.password, user.password);
   if (!isEqual) {
-      throw createHttpError(401, 'Unauthorized');
+    throw createHttpError(401, 'Unauthorized');
   }
 
   await SessionsCollection.deleteOne({ userId: user._id });
@@ -34,20 +33,18 @@ export const loginUser = async (payload) => {
   const refreshToken = randomBytes(30).toString('base64');
 
   return await SessionsCollection.create({
-      userId: user._id,
-      accessToken,
-      refreshToken,
-      accessTokenValidUntil: new Date(Date.now() + TWO_HOURS),
-      refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAYS),
+    userId: user._id,
+    accessToken,
+    refreshToken,
+    accessTokenValidUntil: new Date(Date.now() + TWO_HOURS),
+    refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAYS),
   });
 };
 
-// сервіс для logout-y
 export const logoutUser = async (sessionId) => {
   await SessionsCollection.deleteOne({ _id: sessionId });
 };
 
-// сервіс для refreshToken
 const createSession = () => {
   const accessToken = randomBytes(30).toString('base64');
   const refreshToken = randomBytes(30).toString('base64');

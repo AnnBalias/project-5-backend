@@ -4,7 +4,7 @@ export const getSummaryByPeriodService = async (userId, period) => {
   if (!period || !/^\d{4}-\d{2}$/.test(period)) {
     throw new Error('Invalid or missing period. Use format YYYY-MM.');
   }
-  console.log(period);
+
   const [year, month] = period.split('-');
   const startDate = new Date(`${year}-${month}-01`);
   const endDate = new Date(startDate);
