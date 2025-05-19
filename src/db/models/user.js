@@ -1,4 +1,3 @@
-// модель користувача
 import { model, Schema } from 'mongoose';
 
 const usersSchema = new Schema(
