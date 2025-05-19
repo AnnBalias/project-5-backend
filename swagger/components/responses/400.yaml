@@ -1,4 +1,3 @@
-# 400
 description: Bad request error
 content:
   application/json:

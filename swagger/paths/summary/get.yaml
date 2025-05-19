@@ -1,4 +1,3 @@
-# GET /summary
 tags:
   - Summary
 summary: Get transaction summary by period

@@ -1,4 +1,3 @@
-# 401
 description: Unauthorized error
 content:
   application/json:

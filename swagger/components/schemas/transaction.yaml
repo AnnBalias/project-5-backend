@@ -1,4 +1,3 @@
-# transaction schema
 type: object
 required:
   - _id

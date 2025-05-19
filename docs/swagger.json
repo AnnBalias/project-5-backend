@@ -649,7 +649,9 @@
             "$ref": "#/components/responses/500"
           }
         }
-      },
+      }
+    },
+    "/transactions/{id}": {
       "patch": {
         "tags": [
           "Transactions"
@@ -745,6 +747,10 @@
                     "message": {
                       "type": "string",
                       "example": "Successfully update a transaction!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/transaction"
                     }
                   }
                 }

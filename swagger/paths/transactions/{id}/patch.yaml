@@ -1,4 +1,3 @@
-# patch transaction
 tags:
   - Transactions
 summary: Update transaction by id
@@ -72,9 +71,9 @@ responses:
             message:
               type: string
               example: Successfully update a transaction!
-            # data:
-            #   type: object
-            #   $ref: ../../../components/schemas/transaction.yaml
+            data:
+              type: object
+              $ref: ../../../components/schemas/transaction.yaml
   '404':
     $ref: '../../../components/responses/404.yaml'
   '401':
