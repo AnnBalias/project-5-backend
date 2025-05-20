@@ -17,15 +17,12 @@ authRouter.post(
   ctrlWrapper(registerUserController),
 );
 
-// Rout для login-у
 authRouter.post(
   '/login',
   validateBody(loginUserSchema),
   ctrlWrapper(loginUserController),
 );
 
-// Rout для logout-y
 authRouter.post('/logout', ctrlWrapper(logoutUserController));
 
-// Rout для refreshToken
 authRouter.post('/refresh', ctrlWrapper(refreshUserSessionController));

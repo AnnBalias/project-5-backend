@@ -1,4 +1,3 @@
-// модель сесії
 import { model, Schema } from 'mongoose';
 
 const SessionsSchema = new Schema(

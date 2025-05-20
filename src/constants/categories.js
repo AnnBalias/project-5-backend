@@ -1,4 +1,3 @@
-// константи для категорій
 export const categoryList = [
   'Main expenses',
   'Products',

@@ -6,5 +6,6 @@ export const errorHandler = (error, req, res, next) => {
     message: message,
     data: error.message,
   });
+
   next();
 };

@@ -11,32 +11,26 @@ import {
   deleteTransactionController,
   patchTransactionController,
 } from '../controllers/transactions.js';
-
 import { patchTransactionSchema } from '../validation/transaction.js';
-//import { patchTransactionController } from '../controllers/transaction.js';
 
 export const transactionsRouter = Router();
 
 transactionsRouter.use(authenticate);
 
-// Get all transactions
 transactionsRouter.get('/', ctrlWrapper(getTransactionController));
 
-// Get transaction by ID
 transactionsRouter.get(
   '/:transactionId',
   isValidId,
   ctrlWrapper(getTransactionByIdController),
 );
 
-// Add new transaction
 transactionsRouter.post(
   '/',
   validateBody(transactionAddSchema),
   ctrlWrapper(addTransactionController),
 );
 
-// Rout для оновлення транзакції
 transactionsRouter.patch(
   '/:transactionId',
   isValidId,
@@ -44,7 +38,6 @@ transactionsRouter.patch(
   ctrlWrapper(patchTransactionController),
 );
 
-// Delete transaction
 transactionsRouter.delete(
   '/:transactionId',
   isValidId,

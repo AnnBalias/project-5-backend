@@ -1,20 +1,18 @@
-# get transaction
 tags:
-    - Transactions 
+  - Transactions
 summary: Get all transactions
-description: Retrieves a list of all transactions (details based on provided schema). 
-operationId: listTransactions 
-security: 
-    - bearerAuth: []
-parameters:
-    []
+description: Retrieves a list of all transactions (details based on provided schema).
+operationId: listTransactions
+security:
+  - bearerAuth: []
+parameters: []
 responses:
   '200':
     description: A list of transactions retrieved successfully
     content:
       application/json:
         schema:
-          type: object 
+          type: object
           required:
             - status
             - message
@@ -27,9 +25,9 @@ responses:
               type: string
               example: Transactions retrieved successfully
             data:
-              type: array 
-              $ref: '../../components/schemas/transaction.yaml' 
-  '401': 
+              type: array
+              $ref: '../../components/schemas/transaction.yaml'
+  '401':
     $ref: '../../components/responses/401.yaml'
-  '500': 
+  '500':
     $ref: '../../components/responses/500.yaml'

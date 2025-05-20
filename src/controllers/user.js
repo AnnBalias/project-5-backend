@@ -5,7 +5,6 @@ export const getUserController = async (req, res) => {
   const userData = req.user;
 
   const user = await getUserById(userData._id);
-
   if (!user) {
     throw createHttpError(404, `User with id=${userData._id} not found`);
   }

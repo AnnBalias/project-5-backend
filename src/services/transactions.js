@@ -1,4 +1,3 @@
-// сервіси для роботи з транзакціями
 import { TransactionsCollection } from '../db/models/transaction.js';
 import { UsersCollection } from '../db/models/user.js';
 import { calculateBalanceChange } from '../utils/calculateBalanceChange.js';
@@ -37,7 +36,7 @@ export const updateTransaction = async (transactionId, userId, payload) => {
   ).lean();
 
   if (!oldTransaction) {
-    return null; // обробіть помилку
+    return null;
   }
   const updateTransaction = await TransactionsCollection.findOneAndUpdate(
     {
@@ -51,7 +50,7 @@ export const updateTransaction = async (transactionId, userId, payload) => {
   );
 
   if (!updateTransaction) {
-    return null; // обробіть помилку
+    return null;
   }
   const balanceChange = calculateBalanceChange(
     oldTransaction,

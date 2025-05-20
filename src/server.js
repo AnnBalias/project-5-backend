@@ -1,8 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-
-//import { logger } from './middlewares/logger.js';
+import { logger } from './middlewares/logger.js';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
 import { authRouter } from './routers/auth.js';
 import { userRouter } from './routers/user.js';
@@ -16,17 +15,16 @@ import { getEnvVar } from './utils/getEnvVar.js';
 export const setupServer = () => {
   const app = express();
 
-  // app.use(
-  //   cors({
-  //     origin: 'https://project-5-frontend-pink.vercel.app',
-  //     credentials: true,
-  //   }),
-  // );
+  app.use(
+    cors({
+      origin: 'https://project-5-frontend-pink.vercel.app',
+      credentials: true,
+    }),
+  );
 
-  app.use(cors());
   app.use(cookieParser());
   app.use(express.json());
-  // app.use(logger);
+  app.use(logger);
 
   app.use('/api-docs', swaggerDocs());
 
