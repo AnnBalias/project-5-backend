@@ -5,13 +5,6 @@ operationId: getUser
 description: Get user data
 security:
   - bearerAuth: []
-parameters:
-  - in: header
-    name: User
-    required: true
-    description: User data
-    schema:
-      $ref: '../../components/schemas/user.yaml'
 responses:
   '200':
     description: 'Successfully found user with id=682876f2d066eb3dfb488480'
