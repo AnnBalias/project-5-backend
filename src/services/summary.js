@@ -1,19 +1,25 @@
+import mongoose from 'mongoose';
 import { TransactionsCollection } from '../db/models/transaction.js';
 
 export const getSummaryByPeriodService = async (userId, period) => {
   if (!period || !/^\d{4}-\d{2}$/.test(period)) {
     throw new Error('Invalid or missing period. Use format YYYY-MM.');
   }
-  console.log(period);
+
   const [year, month] = period.split('-');
-  const startDate = new Date(`${year}-${month}-01`);
+  const startDate = new Date(`${year}-${month}-01T00:00:00.000Z`);
   const endDate = new Date(startDate);
   endDate.setMonth(endDate.getMonth() + 1);
+
+  const objectUserId =
+    typeof userId === 'string'
+      ? new mongoose.Types.ObjectId(userId)
+      : mongoose.Types.ObjectId.createFromTime(userId);
 
   const summary = await TransactionsCollection.aggregate([
     {
       $match: {
-        userId: userId,
+        userId: objectUserId,
         date: { $gte: startDate, $lt: endDate },
       },
     },
@@ -23,7 +29,7 @@ export const getSummaryByPeriodService = async (userId, period) => {
           type: '$type',
           category: '$category',
         },
-        totalAmount: { $sum: '$amount' },
+        totalAmount: { $sum: '$sum' },
       },
     },
   ]);
@@ -33,16 +39,13 @@ export const getSummaryByPeriodService = async (userId, period) => {
   let totalIncome = 0;
   let totalExpense = 0;
 
-  summary.forEach((item) => {
-    const { type, category } = item._id;
-    const amount = item.totalAmount;
-
-    if (type === 'income') {
-      incomeByCategory[category] = amount;
-      totalIncome += amount;
-    } else if (type === 'expense') {
-      expenseByCategory[category] = amount;
-      totalExpense += amount;
+  summary.forEach(({ _id: { type, category }, totalAmount }) => {
+    if (type === '+') {
+      incomeByCategory[category] = totalAmount;
+      totalIncome += totalAmount;
+    } else if (type === '-') {
+      expenseByCategory[category] = totalAmount;
+      totalExpense += totalAmount;
     }
   });
 
