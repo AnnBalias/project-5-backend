@@ -15,9 +15,21 @@ import { getEnvVar } from './utils/getEnvVar.js';
 export const setupServer = () => {
   const app = express();
 
+  const origins = [
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://project-5-frontend-pink.vercel.app',
+  ];
+
   app.use(
     cors({
-      origin: 'https://project-5-frontend-pink.vercel.app',
+      origin: (origin, callback) => {
+        if (!origin || origins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
       credentials: true,
     }),
   );
