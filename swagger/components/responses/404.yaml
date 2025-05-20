@@ -1,5 +1,5 @@
 # 404
-description: Contact not found
+description: Transaction not found
 content:
   application/json:
     schema:
@@ -14,7 +14,7 @@ content:
           example: 404
         message:
           type: string
-          example: Contact not found
+          example: Transaction not found
         data:
           type: object
           required:
@@ -22,4 +22,4 @@ content:
           properties:
             message:
               type: string
-              example: 'The contact with the provided ID does not exist.'
+              example: 'The transaction with the provided ID does not exist.'
