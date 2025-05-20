@@ -26,7 +26,9 @@ responses:
               example: Transactions retrieved successfully
             data:
               type: array
-              $ref: '../../components/schemas/transaction.yaml'
+              items:
+                type: object
+                $ref: '../../components/schemas/transaction.yaml'
   '401':
     $ref: '../../components/responses/401.yaml'
   '500':
