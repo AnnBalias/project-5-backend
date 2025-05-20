@@ -31,9 +31,7 @@ export const getTransactionByIdController = async (req, res, next) => {
     next(createHttpError(404, `Transaction with id=${id} not found`));
     return;
   }
-
   res.json(transaction);
-
   try {
     const transaction = await getTransactionById(id, userId);
 
