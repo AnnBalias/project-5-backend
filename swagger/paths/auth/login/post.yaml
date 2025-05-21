@@ -41,6 +41,22 @@ responses:
                 accessToken:
                   type: string
                   example: '3+JL5MkGWjdX6qTDv3yA1vFLWyFxOktcwtxvNXUP'
+  '404':
+    description: 'User not found'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: 'User not found'
+            data:
+              type: string
+              example: 'User not found'
   '400':
     $ref: ../../../components/responses/400.yaml
   '401':
