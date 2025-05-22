@@ -28,5 +28,5 @@ content:
             type: '+'
             category: 'Car'
             comment: 'Details of this transaction'
-            sum: 'personal'
-            userId: 300
+            sum: 300
+            userId: 'personal'

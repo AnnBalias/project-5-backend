@@ -23,7 +23,33 @@ requestBody:
           - category
           - comment
           - sum
-        $ref: ../../components/schemas/transaction.yaml
+        properties:
+          date:
+            description: "Transaction's date"
+            type: string
+            format: date
+            example: '10-May-2025'
+          type:
+            description: "Transaction's type"
+            type: string
+            example: '+'
+          category:
+            description: "Transaction's category"
+            type: string
+            example: 'Car'
+          comment:
+            description: "Transaction's comment"
+            type: string
+            minLength: 2
+            maxLength: 192
+            # nullable: true
+            example: 'Details of this transaction'
+          sum:
+            description: 'Amount of the transaction'
+            type: number
+            minimum: 0.01
+            maximum: 1000000
+            example: 300.00
       examples:
         createTransactionRequest:
           summary: Example Transaction Request Body

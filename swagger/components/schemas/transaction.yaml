@@ -25,3 +25,19 @@ properties:
     minimum: 0.01
     maximum: 1000000
     example: 300.00
+  userId:
+    description: 'User id'
+    type: string
+    example: 65e4decdd286b30065d54af9
+  _id:
+    description: 'Contact id'
+    type: string
+    example: 65e4decdd286b30065d54af9
+  createdAt:
+    description: 'Automatically added when you post to a contact'
+    type: string
+    example: '2025-04-27T10:55:52.393Z'
+  updatedAt:
+    description: 'Automatically added when you post to a contact'
+    type: string
+    example: '2025-04-28T18:22:58.663Z'
