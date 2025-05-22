@@ -1,11 +1,17 @@
 tags:
   - Transactions
-summary: Update transaction by id
+summary: Update transaction
 operationId: updateTransaction
 description: 'Update a transaction by Id with payload'
 security:
   - bearerAuth: []
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/'
+    required: true
   - in: path
     name: id
     required: true
@@ -17,42 +23,7 @@ requestBody:
     application/json:
       schema:
         type: object
-
-        properties:
-          date:
-            description: "Transaction's  time"
-            type: string
-            format: date-time
-            example: '2025-05-17T20:47:45.791Z'
-          type:
-            description: "Transaction's type"
-            type: string
-            enum: ['income', 'expense']
-            example: 'expense'
-          category:
-            description: "Transaction's category"
-            type: string
-            enum:
-              [
-                'Products',
-                'Car',
-                'Self care',
-                'Child care',
-                'Household products',
-                'Education',
-                'Leisure',
-                'Other expenses',
-                'Entertainment',
-              ]
-            example: 'Products'
-          comment:
-            description: "Transaction's comment"
-            type: string
-            example: 'products'
-          sum:
-            description: "Transaction's sum"
-            type: number
-            example: 100
+        $ref: ../../../components/schemas/transaction.yaml
 responses:
   '200':
     description: Updated a transaction
