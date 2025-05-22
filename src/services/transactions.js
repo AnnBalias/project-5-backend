@@ -10,14 +10,6 @@ export const getAllTransactions = async (userId) => {
   return result;
 };
 
-export const getTransactionById = async (transactionId, userId) => {
-  const result = await TransactionsCollection.findOne({
-    transactionId,
-    userId,
-  });
-  return result;
-};
-
 export const addTransaction = async (transactionData, userId) => {
   const result = await TransactionsCollection.create({
     ...transactionData,

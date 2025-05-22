@@ -6,7 +6,6 @@ import { validateBody } from '../utils/validateBody.js';
 import { transactionAddSchema } from '../validation/transaction.js';
 import {
   getTransactionController,
-  getTransactionByIdController,
   addTransactionController,
   deleteTransactionController,
   patchTransactionController,
@@ -18,12 +17,6 @@ export const transactionsRouter = Router();
 transactionsRouter.use(authenticate);
 
 transactionsRouter.get('/', ctrlWrapper(getTransactionController));
-
-transactionsRouter.get(
-  '/:transactionId',
-  isValidId,
-  ctrlWrapper(getTransactionByIdController),
-);
 
 transactionsRouter.post(
   '/',
