@@ -1,7 +1,6 @@
 import createHttpError from 'http-errors';
 import {
   getAllTransactions,
-  getTransactionById,
   addTransaction,
   deleteTransaction,
   updateTransaction,
@@ -18,28 +17,6 @@ export const getTransactionController = async (req, res) => {
     message: 'Successfully retrieved all transactions',
     data: transactions,
   });
-};
-
-export const getTransactionByIdController = async (req, res, next) => {
-  const userId = req.user._id;
-  const { id } = req.params;
-
-  try {
-    const transaction = await getTransactionById(id, userId);
-    if (!transaction) {
-      next(createHttpError(404, `Transaction with id=${id} not found`));
-      return;
-    }
-
-    res.json({
-      status: 200,
-      message: 'Successfully retrieved transaction',
-      data: transaction,
-    });
-  } catch {
-    next(createHttpError(400, 'Invalid transaction ID format'));
-    return;
-  }
 };
 
 export const addTransactionController = async (req, res) => {

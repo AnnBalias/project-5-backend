@@ -11,9 +11,6 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
-    },
-    {
       "url": "https://spendy-mu36.onrender.com"
     }
   ],
@@ -679,70 +676,6 @@
       }
     },
     "/transactions/{id}": {
-      "get": {
-        "tags": [
-          "Transactions"
-        ],
-        "summary": "Get transaction",
-        "description": "Get transaction",
-        "operationId": "getTransaction",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "65ca67e7ae7f10c88b598384"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved transaction",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 200
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully retrieved transaction"
-                    },
-                    "data": {
-                      "type": "object",
-                      "$ref": "#/components/schemas/transaction"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
-          },
-          "500": {
-            "$ref": "#/components/responses/500"
-          }
-        }
-      },
       "patch": {
         "tags": [
           "Transactions"
@@ -892,7 +825,7 @@
         }
       }
     },
-    "/user": {
+    "/users/current": {
       "get": {
         "tags": [
           "User"

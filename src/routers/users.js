@@ -3,8 +3,8 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { getUserController } from '../controllers/user.js';
 import { authenticate } from '../middlewares/authenticate.js';
 
-export const userRouter = Router();
+export const usersRouter = Router();
 
-userRouter.use(authenticate);
+usersRouter.use(authenticate);
 
-userRouter.get('/', ctrlWrapper(getUserController));
+usersRouter.get('/current', ctrlWrapper(getUserController));
