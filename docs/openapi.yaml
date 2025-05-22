@@ -18,7 +18,6 @@ tags:
   - name: User
     description: Get user operation.
 servers:
-  - url: http://localhost:3000
   - url: https://spendy-mu36.onrender.com
 paths:
   /auth/register:
@@ -46,15 +45,13 @@ paths:
     post:
       $ref: '../swagger/paths/transactions/post.yaml'
   /transactions/{id}:
-    get:
-      $ref: '../swagger/paths/transactions/{id}/get.yaml'
     patch:
       $ref: '../swagger/paths/transactions/{id}/patch.yaml'
     delete:
       $ref: '../swagger/paths/transactions/{id}/delete.yaml'
-  /user:
+  /users/current:
     get:
-      $ref: '../swagger/paths/user/get.yaml'
+      $ref: '../swagger/paths/users/get.yaml'
 components:
   securitySchemes:
     bearerAuth:

@@ -16,6 +16,7 @@ export const setupServer = () => {
   const app = express();
 
   const origins = [
+    'https://console.cron-job.org',
     'http://localhost:3000',
     'http://localhost:5173',
     'https://spendy-mu36.onrender.com',
