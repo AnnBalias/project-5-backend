@@ -1,10 +1,17 @@
 tags:
   - Auth
-summary: User logout
-operationId: logoutUser
+summary: Logout
+operationId: logout
 description: 'Logs out the user and removes session data from cookies and database'
 security:
   - bearerAuth: []
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/'
+    required: true
 responses:
   '204':
     description: ''
