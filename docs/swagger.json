@@ -32,8 +32,8 @@
       "description": "Transactions operations."
     },
     {
-      "name": "User",
-      "description": "Get user operation."
+      "name": "Users",
+      "description": "Get users operation."
     }
   ],
   "paths": {
@@ -42,36 +42,15 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Register user",
-        "operationId": "registerUser",
+        "summary": "Register",
+        "operationId": "Register",
         "description": "Register user",
         "security": [],
         "requestBody": {
-          "description": "Register user",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "name",
-                  "email",
-                  "password"
-                ],
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "example": "John Mate"
-                  },
-                  "email": {
-                    "type": "string",
-                    "example": "mate@mail.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "example123"
-                  }
-                }
+                "$ref": "#/components/schemas/register"
               }
             }
           }
@@ -157,31 +136,15 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Login user",
-        "operationId": "loginUser",
+        "summary": "Login",
+        "operationId": "login",
         "description": "Logs in a user and returns an access token. Refresh token is set in cookies.",
         "security": [],
         "requestBody": {
-          "description": " Login user",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "email",
-                  "password"
-                ],
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "example": "user@example.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "example12345"
-                  }
-                }
+                "$ref": "#/components/schemas/login"
               }
             }
           }
@@ -257,12 +220,23 @@
         "tags": [
           "Auth"
         ],
-        "summary": "User logout",
-        "operationId": "logoutUser",
+        "summary": "Logout",
+        "operationId": "logout",
         "description": "Logs out the user and removes session data from cookies and database",
         "security": [
           {
             "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/"
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -283,12 +257,23 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Refresh user session",
-        "operationId": "refreshUserSession",
+        "summary": "Refresh session",
+        "operationId": "refreshSession",
         "description": "Refresh access token using refresh token from cookies",
         "security": [
           {
             "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/"
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -337,10 +322,21 @@
         ],
         "summary": "Get all categories",
         "operationId": "getCategories",
-        "description": "Get all categories.",
+        "description": "Get all categories",
         "security": [
           {
             "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/"
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -425,6 +421,15 @@
           }
         ],
         "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/"
+            },
+            "required": true
+          },
           {
             "in": "path",
             "name": "period",
@@ -543,7 +548,17 @@
             "bearerAuth": []
           }
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "A list of transactions retrieved successfully",
@@ -590,11 +605,22 @@
           "Transactions"
         ],
         "summary": "Create a new transaction",
-        "description": "Creates a new transaction with provided details.",
         "operationId": "createTransaction",
+        "description": "Creates a new transaction with provided details.",
         "security": [
           {
             "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/"
+            },
+            "required": true
           }
         ],
         "requestBody": {
@@ -611,38 +637,7 @@
                   "comment",
                   "sum"
                 ],
-                "properties": {
-                  "date": {
-                    "description": "Transaction's date",
-                    "type": "string",
-                    "format": "date",
-                    "example": "10-May-2025"
-                  },
-                  "type": {
-                    "description": "Transaction's type",
-                    "type": "string",
-                    "example": "+"
-                  },
-                  "category": {
-                    "description": "Transaction's category",
-                    "type": "string",
-                    "example": "Car"
-                  },
-                  "comment": {
-                    "description": "Transaction's comment",
-                    "type": "string",
-                    "minLength": 2,
-                    "maxLength": 192,
-                    "example": "Details of this transaction"
-                  },
-                  "sum": {
-                    "description": "Amount of the transaction",
-                    "type": "number",
-                    "minimum": 0.01,
-                    "maximum": 1000000,
-                    "example": 300
-                  }
-                }
+                "$ref": "#/components/schemas/transaction"
               },
               "examples": {
                 "createTransactionRequest": {
@@ -680,7 +675,7 @@
         "tags": [
           "Transactions"
         ],
-        "summary": "Update transaction by id",
+        "summary": "Update transaction",
         "operationId": "updateTransaction",
         "description": "Update a transaction by Id with payload",
         "security": [
@@ -689,6 +684,15 @@
           }
         ],
         "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/"
+            },
+            "required": true
+          },
           {
             "in": "path",
             "name": "id",
@@ -704,49 +708,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "date": {
-                    "description": "Transaction's  time",
-                    "type": "string",
-                    "format": "date-time",
-                    "example": "2025-05-17T20:47:45.791Z"
-                  },
-                  "type": {
-                    "description": "Transaction's type",
-                    "type": "string",
-                    "enum": [
-                      "income",
-                      "expense"
-                    ],
-                    "example": "expense"
-                  },
-                  "category": {
-                    "description": "Transaction's category",
-                    "type": "string",
-                    "enum": [
-                      "Products",
-                      "Car",
-                      "Self care",
-                      "Child care",
-                      "Household products",
-                      "Education",
-                      "Leisure",
-                      "Other expenses",
-                      "Entertainment"
-                    ],
-                    "example": "Products"
-                  },
-                  "comment": {
-                    "description": "Transaction's comment",
-                    "type": "string",
-                    "example": "products"
-                  },
-                  "sum": {
-                    "description": "Transaction's sum",
-                    "type": "number",
-                    "example": 100
-                  }
-                }
+                "$ref": "#/components/schemas/transaction"
               }
             }
           }
@@ -796,7 +758,7 @@
         "tags": [
           "Transactions"
         ],
-        "summary": "Delete transaction by ID",
+        "summary": "Delete transaction",
         "operationId": "deleteTransaction",
         "description": "Delete a transaction by it's ID.",
         "security": [
@@ -805,6 +767,15 @@
           }
         ],
         "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/"
+            },
+            "required": true
+          },
           {
             "in": "path",
             "name": "id",
@@ -828,14 +799,25 @@
     "/users/current": {
       "get": {
         "tags": [
-          "User"
+          "Users"
         ],
         "summary": "Get user data",
-        "operationId": "getUser",
+        "operationId": "getCurrentUser",
         "description": "Get user data",
         "security": [
           {
             "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/"
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -909,6 +891,36 @@
       }
     },
     "schemas": {
+      "register": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "properties": {
+          "name": {
+            "description": "User name",
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 32,
+            "example": "Martine Belly"
+          },
+          "email": {
+            "description": "User email",
+            "type": "string",
+            "maxLength": 64,
+            "example": "martine.belly@gmail.com"
+          },
+          "password": {
+            "description": "User password",
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 64,
+            "example": "password12345!"
+          }
+        }
+      },
       "user": {
         "properties": {
           "_id": {
@@ -929,7 +941,7 @@
           "balance": {
             "description": "User balance",
             "type": "number",
-            "example": 3000.25
+            "example": 0
           },
           "createdAt": {
             "description": "Automatically added when you post to a contact",
@@ -943,26 +955,34 @@
           }
         }
       },
-      "transaction": {
+      "login": {
         "type": "object",
         "required": [
-          "_id",
-          "date",
-          "type",
-          "category",
-          "comment",
-          "sum",
-          "userId"
+          "email",
+          "password"
         ],
         "properties": {
-          "_id": {
-            "description": "Transaction's id",
+          "email": {
+            "description": "User email",
             "type": "string",
-            "example": "65e4decdd286b30065d54af9"
+            "maxLength": 64,
+            "example": "martine.belly@gmail.com"
           },
+          "password": {
+            "description": "User password",
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 64,
+            "example": "password12345!"
+          }
+        }
+      },
+      "transaction": {
+        "properties": {
           "date": {
             "description": "Transaction's date",
             "type": "string",
+            "format": "date",
             "example": "10-May-2025"
           },
           "type": {
@@ -978,21 +998,16 @@
           "comment": {
             "description": "Transaction's comment",
             "type": "string",
+            "minLength": 2,
+            "maxLength": 192,
             "example": "Details of this transaction"
           },
           "sum": {
-            "description": "Contact Type of the client",
-            "enum": [
-              "work",
-              "home",
-              "personal"
-            ],
-            "example": "personal"
-          },
-          "userId": {
-            "description": "User iD of the user",
+            "description": "Amount of the transaction",
             "type": "number",
-            "example": "300.00"
+            "minimum": 0.01,
+            "maximum": 1000000,
+            "example": 300
           }
         }
       }

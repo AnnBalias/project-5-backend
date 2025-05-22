@@ -15,8 +15,8 @@ tags:
     description: Get summary by period.
   - name: Transactions
     description: Transactions operations.
-  - name: User
-    description: Get user operation.
+  - name: Users
+    description: Get users operation.
 servers:
   - url: https://spendy-mu36.onrender.com
 paths:
@@ -32,7 +32,6 @@ paths:
   /auth/refresh:
     post:
       $ref: '../swagger/paths/auth/refresh/post.yaml'
-
   /categories:
     get:
       $ref: '../swagger/paths/categories/get.yaml'
