@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import { logger } from './middlewares/logger.js';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
 import { authRouter } from './routers/auth.js';
-import { userRouter } from './routers/user.js';
+import { usersRouter } from './routers/users.js';
 import { categoriesRouter } from './routers/categories.js';
 import { transactionsRouter } from './routers/transactions.js';
 import { summaryRouter } from './routers/summary.js';
@@ -18,6 +18,7 @@ export const setupServer = () => {
   const origins = [
     'http://localhost:3000',
     'http://localhost:5173',
+    'https://spendy-mu36.onrender.com',
     'https://project-5-frontend-pink.vercel.app',
   ];
 
@@ -41,7 +42,7 @@ export const setupServer = () => {
   app.use('/api-docs', swaggerDocs());
 
   app.use('/auth', authRouter);
-  app.use('/user', userRouter);
+  app.use('/users', usersRouter);
   app.use('/categories', categoriesRouter);
   app.use('/transactions', transactionsRouter);
   app.use('/summary', summaryRouter);
