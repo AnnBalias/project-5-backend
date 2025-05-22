@@ -5,14 +5,19 @@ required:
   - password
 properties:
   name:
-    description: "User's name"
+    description: 'User name'
     type: string
+    minLength: 2
+    maxLength: 32
     example: 'Martine Belly'
   email:
-    description: "User's email"
+    description: 'User email'
     type: string
+    maxLength: 64
     example: 'martine.belly@gmail.com'
   password:
-    description: "User's password"
+    description: 'User password'
     type: string
+    minLength: 8
+    maxLength: 64
     example: 'password12345!'
