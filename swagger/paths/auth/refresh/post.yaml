@@ -1,10 +1,17 @@
 tags:
   - Auth
-summary: Refresh user session
-operationId: refreshUserSession
+summary: Refresh session
+operationId: refreshSession
 description: 'Refresh access token using refresh token from cookies'
 security:
   - bearerAuth: []
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/'
+    required: true
 responses:
   '200':
     description: 'Successfully refreshed a session!'

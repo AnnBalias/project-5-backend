@@ -1,26 +1,14 @@
 tags:
   - Auth
-summary: Login user
-operationId: loginUser
+summary: Login
+operationId: login
 description: Logs in a user and returns an access token. Refresh token is set in cookies.
 security: []
 requestBody:
-  description: ' Login user'
-  required: true
   content:
     application/json:
       schema:
-        type: object
-        required:
-          - email
-          - password
-        properties:
-          email:
-            type: string
-            example: user@example.com
-          password:
-            type: string
-            example: example12345
+        $ref: ../../../components/schemas/login.yaml
 responses:
   '200':
     description: 'Successfully logged in an user!'
@@ -41,6 +29,10 @@ responses:
                 accessToken:
                   type: string
                   example: '3+JL5MkGWjdX6qTDv3yA1vFLWyFxOktcwtxvNXUP'
+  '400':
+    $ref: ../../../components/responses/400.yaml
+  '401':
+    $ref: ../../../components/responses/401.yaml
   '404':
     description: 'User not found'
     content:
@@ -57,9 +49,5 @@ responses:
             data:
               type: string
               example: 'User not found'
-  '400':
-    $ref: ../../../components/responses/400.yaml
-  '401':
-    $ref: ../../../components/responses/401.yaml
   '500':
     $ref: ../../../components/responses/500.yaml

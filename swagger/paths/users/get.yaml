@@ -1,10 +1,17 @@
 tags:
-  - User
+  - Users
 summary: Get user data
-operationId: getUser
+operationId: getCurrentUser
 description: Get user data
 security:
   - bearerAuth: []
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/'
+    required: true
 responses:
   '200':
     description: 'Successfully found user with id=682876f2d066eb3dfb488480'

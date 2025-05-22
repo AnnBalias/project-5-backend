@@ -5,7 +5,13 @@ description: Retrieves a list of all transactions (details based on provided sch
 operationId: listTransactions
 security:
   - bearerAuth: []
-parameters: []
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/'
+    required: true
 responses:
   '200':
     description: A list of transactions retrieved successfully

@@ -14,7 +14,7 @@ properties:
   balance:
     description: 'User balance'
     type: number
-    example: 3000.25
+    example: 0
   # photo:
   #   description: 'Link to contact photo'
   #   type: string

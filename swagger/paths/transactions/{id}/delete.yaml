@@ -1,11 +1,17 @@
 tags:
   - Transactions
-summary: Delete transaction by ID
+summary: Delete transaction
 operationId: deleteTransaction
 description: Delete a transaction by it's ID.
 security:
   - bearerAuth: []
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/'
+    required: true
   - in: path
     name: id
     required: true

@@ -1,20 +1,8 @@
-type: object
-required:
-  - _id
-  - date
-  - type
-  - category
-  - comment
-  - sum
-  - userId
 properties:
-  _id:
-    description: "Transaction's id"
-    type: string
-    example: 65e4decdd286b30065d54af9
   date:
     description: "Transaction's date"
     type: string
+    format: date
     example: '10-May-2025'
   type:
     description: "Transaction's type"
@@ -27,12 +15,13 @@ properties:
   comment:
     description: "Transaction's comment"
     type: string
+    minLength: 2
+    maxLength: 192
+    # nullable: true
     example: 'Details of this transaction'
   sum:
-    description: 'Contact Type of the client'
-    enum: ['work', 'home', 'personal']
-    example: 'personal'
-  userId:
-    description: 'User iD of the user'
+    description: 'Amount of the transaction'
     type: number
-    example: '300.00'
+    minimum: 0.01
+    maximum: 1000000
+    example: 300.00

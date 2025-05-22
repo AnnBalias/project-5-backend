@@ -6,6 +6,12 @@ description: 'Returns income and expense summary by categories for a specific pe
 security:
   - bearerAuth: []
 parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/'
+    required: true
   - in: path
     name: period
     required: true

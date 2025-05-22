@@ -1,30 +1,14 @@
 tags:
   - Auth
-summary: Register user
-operationId: registerUser
+summary: Register
+operationId: Register
 description: 'Register user'
 security: []
 requestBody:
-  description: 'Register user'
-  required: true
   content:
     application/json:
       schema:
-        type: object
-        required:
-          - name
-          - email
-          - password
-        properties:
-          name:
-            type: string
-            example: John Mate
-          email:
-            type: string
-            example: mate@mail.com
-          password:
-            type: string
-            example: example123
+        $ref: ../../../components/schemas/register.yaml
 responses:
   '201':
     description: 'Successfully registered a user!'
@@ -42,22 +26,6 @@ responses:
             data:
               type: object
               $ref: ../../../components/schemas/user.yaml
-  '409':
-    description: 'Email in use'
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            status:
-              type: integer
-              example: 409
-            message:
-              type: string
-              example: 'Email in use'
-            data:
-              type: string
-              example: 'Email in use'
   '400':
     description: 'Email in use'
     content:
@@ -74,3 +42,19 @@ responses:
             data:
               type: string
               example: 'Bad request'
+  '409':
+    description: 'Email in use'
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 409
+            message:
+              type: string
+              example: 'Email in use'
+            data:
+              type: string
+              example: 'Email in use'

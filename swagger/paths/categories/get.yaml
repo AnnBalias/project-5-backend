@@ -2,11 +2,18 @@ tags:
   - Categories
 summary: Get all categories
 operationId: getCategories
-description: Get all categories.
+description: Get all categories
 security:
   - bearerAuth: []
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/'
+    required: true
 responses:
-  200:
+  '200':
     description: Successfully retrieved all categories
     content:
       application/json:
@@ -33,7 +40,7 @@ responses:
                   type:
                     type: string
                     example: 'income'
-  404:
+  '404':
     description: No categories found
     content:
       application/json:
