@@ -4,10 +4,13 @@ required:
   - password
 properties:
   email:
-    description: "User's email"
+    description: 'User email'
     type: string
-    example: 'mallow@gmail.com'
+    maxLength: 64
+    example: 'martine.belly@gmail.com'
   password:
-    description: "User's password"
+    description: 'User password'
     type: string
+    minLength: 8
+    maxLength: 64
     example: 'password12345!'
