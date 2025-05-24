@@ -9,3 +9,29 @@ export const getUserById = async (id) => {
 
   return user;
 };
+
+export const updateUser = async (userId, payload) => {
+  const photo = payload.photo;
+  const data = payload.data;
+
+  console.log('data:', data);
+
+  const user = await UsersCollection.findOneAndUpdate(
+    { _id: userId },
+    { photo, ...data },
+    {
+      new: true,
+      includeResultMetadata: true,
+    },
+  );
+
+  if (!user || !user.value) return null;
+
+  if (!user) {
+    throw createHttpError(404, 'User not found!');
+  }
+
+  return {
+    data: user.value,
+  };
+};
