@@ -11,6 +11,11 @@ const categorySchema = new mongoose.Schema({
     enum: ['income', 'expense'],
     required: true,
   },
+  color: {
+    type: String,
+    required: true,
+    unique: true,
+  },
 });
 
 export default mongoose.model('Category', categorySchema);
