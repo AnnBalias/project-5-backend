@@ -1,0 +1,77 @@
+tags:
+  - Users
+summary: Updating user data
+operationId: patchCurrentUser
+description: Updating user data with the ability to add a photo
+security:
+  - bearerAuth: []
+parameters:
+  - in: header
+    name: Authorization
+    schema:
+      type: string
+      example: 'Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/'
+    required: true
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            description: 'User name'
+            type: string
+            minLength: 2
+            maxLength: 32
+            example: 'Martine Belly'
+          email:
+            description: 'User email'
+            type: string
+            maxLength: 64
+            example: 'martine.belly@gmail.com'
+          photo:
+            description: 'Link to photo'
+            type: string
+            format: binary
+            example: 'https://res.cloudinary.com/dy4vxv2lf/image/upload/image.png'
+responses:
+  '200':
+    description: 'Successfully update user with id=682876f2d066eb3dfb488480'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Successfully update user with id=682876f2d066eb3dfb488480'
+            data:
+              type: object
+              $ref: '../../components/schemas/user.yaml'
+  '401':
+    description: Session not found
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 401
+            message:
+              type: string
+              example: 'Session not found'
+            data:
+              type: string
+              example: 'Session not found'
