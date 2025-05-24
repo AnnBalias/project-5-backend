@@ -60,5 +60,12 @@ export const deleteTransaction = async (transactionId, userId) => {
     _id: transactionId,
     userId,
   });
+
+  const balanceChange = calculateBalanceChange(null, result);
+
+  await UsersCollection.findByIdAndUpdate(userId, {
+    $inc: { balance: -balanceChange },
+  });
+
   return result;
 };
