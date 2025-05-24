@@ -6,11 +6,13 @@ import {
   updateTransaction,
 } from '../services/transactions.js';
 import { UsersCollection } from '../db/models/user.js';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 
 export const getTransactionController = async (req, res) => {
+  const { page, perPage } = parsePaginationParams(req.query);
   const userId = req.user._id;
 
-  const transactions = await getAllTransactions(userId);
+  const transactions = await getAllTransactions(userId, page, perPage);
 
   res.json({
     status: 200,

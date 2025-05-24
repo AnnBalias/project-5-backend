@@ -11,6 +11,7 @@ import { summaryRouter } from './routers/summary.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { getEnvVar } from './utils/getEnvVar.js';
+import { UPLOAD_DIR } from './constants/index.js';
 
 export const setupServer = () => {
   const app = express();
@@ -38,6 +39,7 @@ export const setupServer = () => {
 
   app.use(cookieParser());
   app.use(express.json());
+  app.use('/upload', express.static(UPLOAD_DIR));
   app.use(logger);
 
   app.use('/api-docs', swaggerDocs());

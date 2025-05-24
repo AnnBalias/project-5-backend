@@ -6,19 +6,22 @@ properties:
   name:
     description: 'User name'
     type: string
-    example: 'Valera'
+    minLength: 2
+    maxLength: 32
+    example: 'Martine Belly'
   email:
     description: 'User email'
     type: string
-    example: 'bublik34@example.com'
+    maxLength: 64
+    example: 'martine.belly@gmail.com'
   balance:
     description: 'User balance'
     type: number
     example: 0
-  # photo:
-  #   description: 'Link to contact photo'
-  #   type: string
-  #   example: https://res.cloudinary.com/dy4vxv2lf/image/upload/image.png
+  photo:
+    description: 'Link to contact photo'
+    type: string
+    example: https://res.cloudinary.com/dy4vxv2lf/image/upload/image.png
   createdAt:
     description: 'Automatically added when you post to a contact'
     type: string

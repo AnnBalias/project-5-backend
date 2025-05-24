@@ -51,6 +51,8 @@ paths:
   /users/current:
     get:
       $ref: '../swagger/paths/users/get.yaml'
+    patch:
+      $ref: '../swagger/paths/users/patch.yaml'
 components:
   securitySchemes:
     bearerAuth:

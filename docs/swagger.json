@@ -557,6 +557,22 @@
               "example": "Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/"
             },
             "required": true
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "perPage",
+            "schema": {
+              "type": "integer",
+              "example": 8
+            }
           }
         ],
         "responses": {
@@ -581,10 +597,48 @@
                       "example": "Transactions retrieved successfully"
                     },
                     "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "$ref": "#/components/schemas/transaction"
+                      "type": "object",
+                      "required": [
+                        "data",
+                        "page",
+                        "perPage",
+                        "totalitems",
+                        "totalPages",
+                        "hasNextPages",
+                        "hasPreviousPages"
+                      ],
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "$ref": "#/components/schemas/transaction"
+                          }
+                        },
+                        "page": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "perPage": {
+                          "type": "integer",
+                          "example": 10
+                        },
+                        "totalPages": {
+                          "type": "integer",
+                          "example": 5
+                        },
+                        "totalitems": {
+                          "type": "integer",
+                          "example": 50
+                        },
+                        "hasNextPages": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "hasPreviousPages": {
+                          "type": "boolean",
+                          "example": false
+                        }
                       }
                     }
                   }
@@ -624,8 +678,6 @@
           }
         ],
         "requestBody": {
-          "description": "Transaction data to create",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -637,7 +689,38 @@
                   "comment",
                   "sum"
                 ],
-                "$ref": "#/components/schemas/transaction"
+                "properties": {
+                  "date": {
+                    "description": "Transaction's date",
+                    "type": "string",
+                    "format": "date",
+                    "example": "10-May-2025"
+                  },
+                  "type": {
+                    "description": "Transaction's type",
+                    "type": "string",
+                    "example": "+"
+                  },
+                  "category": {
+                    "description": "Transaction's category",
+                    "type": "string",
+                    "example": "Car"
+                  },
+                  "comment": {
+                    "description": "Transaction's comment",
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 192,
+                    "example": "Details of this transaction"
+                  },
+                  "sum": {
+                    "description": "Amount of the transaction",
+                    "type": "number",
+                    "minimum": 0.01,
+                    "maximum": 1000000,
+                    "example": 300
+                  }
+                }
               },
               "examples": {
                 "createTransactionRequest": {
@@ -880,6 +963,120 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Updating user data",
+        "operationId": "patchCurrentUser",
+        "description": "Updating user data with the ability to add a photo",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "example": "Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "User name",
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 32,
+                    "example": "Martine Belly"
+                  },
+                  "email": {
+                    "description": "User email",
+                    "type": "string",
+                    "maxLength": 64,
+                    "example": "martine.belly@gmail.com"
+                  },
+                  "photo": {
+                    "description": "Link to photo",
+                    "type": "string",
+                    "format": "binary",
+                    "example": "https://res.cloudinary.com/dy4vxv2lf/image/upload/image.png"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully update user with id=682876f2d066eb3dfb488480",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully update user with id=682876f2d066eb3dfb488480"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Session not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Session not found"
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "Session not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -931,17 +1128,25 @@
           "name": {
             "description": "User name",
             "type": "string",
-            "example": "Valera"
+            "minLength": 2,
+            "maxLength": 32,
+            "example": "Martine Belly"
           },
           "email": {
             "description": "User email",
             "type": "string",
-            "example": "bublik34@example.com"
+            "maxLength": 64,
+            "example": "martine.belly@gmail.com"
           },
           "balance": {
             "description": "User balance",
             "type": "number",
             "example": 0
+          },
+          "photo": {
+            "description": "Link to contact photo",
+            "type": "string",
+            "example": "https://res.cloudinary.com/dy4vxv2lf/image/upload/image.png"
           },
           "createdAt": {
             "description": "Automatically added when you post to a contact",
@@ -1008,6 +1213,26 @@
             "minimum": 0.01,
             "maximum": 1000000,
             "example": 300
+          },
+          "userId": {
+            "description": "User id",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "_id": {
+            "description": "Contact id",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "createdAt": {
+            "description": "Automatically added when you post to a contact",
+            "type": "string",
+            "example": "2025-04-27T10:55:52.393Z"
+          },
+          "updatedAt": {
+            "description": "Automatically added when you post to a contact",
+            "type": "string",
+            "example": "2025-04-28T18:22:58.663Z"
           }
         }
       }
@@ -1050,8 +1275,8 @@
                     "type": "+",
                     "category": "Car",
                     "comment": "Details of this transaction",
-                    "sum": "personal",
-                    "userId": 300
+                    "sum": 300,
+                    "userId": "personal"
                   }
                 }
               }

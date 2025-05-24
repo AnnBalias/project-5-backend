@@ -12,6 +12,16 @@ parameters:
       type: string
       example: 'Bearer cB31r7onciYnbnrDPbYtKrysfJD7gN6KyqQgLqL/'
     required: true
+  - in: query
+    name: page
+    schema:
+      type: integer
+      example: 1
+  - in: query
+    name: perPage
+    schema:
+      type: integer
+      example: 8
 responses:
   '200':
     description: A list of transactions retrieved successfully
@@ -31,10 +41,39 @@ responses:
               type: string
               example: Transactions retrieved successfully
             data:
-              type: array
-              items:
-                type: object
-                $ref: '../../components/schemas/transaction.yaml'
+              type: object
+              required:
+                - data
+                - page
+                - perPage
+                - totalitems
+                - totalPages
+                - hasNextPages
+                - hasPreviousPages
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    $ref: '../../components/schemas/transaction.yaml'
+                page:
+                  type: integer
+                  example: 1
+                perPage:
+                  type: integer
+                  example: 10
+                totalPages:
+                  type: integer
+                  example: 5
+                totalitems:
+                  type: integer
+                  example: 50
+                hasNextPages:
+                  type: boolean
+                  example: true
+                hasPreviousPages:
+                  type: boolean
+                  example: false
   '401':
     $ref: '../../components/responses/401.yaml'
   '500':
