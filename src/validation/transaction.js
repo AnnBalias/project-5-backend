@@ -50,7 +50,7 @@ export const patchTransactionSchema = Joi.object({
     .messages({
       'any.only': 'Category must be one of the allowed values',
     }),
-  comment: Joi.string().max(100).messages({
+  comment: Joi.string().max(100).allow('').messages({
     'string.base': 'comment should be a string',
     'string.max': 'Comment no more than 100 characters',
   }),
