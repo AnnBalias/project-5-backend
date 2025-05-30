@@ -28,7 +28,7 @@ requestBody:
             description: "Transaction's date"
             type: string
             format: date
-            example: '10-May-2025'
+            example: '2025-05-25'
           type:
             description: "Transaction's type"
             type: string
@@ -40,9 +40,7 @@ requestBody:
           comment:
             description: "Transaction's comment"
             type: string
-            minLength: 2
-            maxLength: 192
-            # nullable: true
+            maxLength: 100
             example: 'Details of this transaction'
           sum:
             description: 'Amount of the transaction'
