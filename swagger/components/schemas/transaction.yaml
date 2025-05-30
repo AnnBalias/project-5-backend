@@ -3,7 +3,7 @@ properties:
     description: "Transaction's date"
     type: string
     format: date
-    example: '10-May-2025'
+    example: '2025-05-25'
   type:
     description: "Transaction's type"
     type: string
@@ -15,8 +15,7 @@ properties:
   comment:
     description: "Transaction's comment"
     type: string
-    minLength: 2
-    maxLength: 192
+    maxLength: 100
     # nullable: true
     example: 'Details of this transaction'
   sum:
