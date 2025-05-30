@@ -791,7 +791,37 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "$ref": "#/components/schemas/transaction"
+                "properties": {
+                  "date": {
+                    "description": "Transaction's date",
+                    "type": "string",
+                    "format": "date",
+                    "example": "2025-05-25"
+                  },
+                  "type": {
+                    "description": "Transaction's type",
+                    "type": "string",
+                    "example": "+"
+                  },
+                  "category": {
+                    "description": "Transaction's category",
+                    "type": "string",
+                    "example": "Car"
+                  },
+                  "comment": {
+                    "description": "Transaction's comment",
+                    "type": "string",
+                    "maxLength": 100,
+                    "example": "Details of this transaction"
+                  },
+                  "sum": {
+                    "description": "Amount of the transaction",
+                    "type": "number",
+                    "minimum": 0.01,
+                    "maximum": 1000000,
+                    "example": 300
+                  }
+                }
               }
             }
           }
@@ -1188,7 +1218,7 @@
             "description": "Transaction's date",
             "type": "string",
             "format": "date",
-            "example": "10-May-2025"
+            "example": "2025-05-25"
           },
           "type": {
             "description": "Transaction's type",
@@ -1203,8 +1233,7 @@
           "comment": {
             "description": "Transaction's comment",
             "type": "string",
-            "minLength": 2,
-            "maxLength": 192,
+            "maxLength": 100,
             "example": "Details of this transaction"
           },
           "sum": {
